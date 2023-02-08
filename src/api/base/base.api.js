@@ -50,4 +50,19 @@ export default {
 
     return response.data;
   },
+  remove: async (table, object) => {
+    var data = JSON.stringify({
+      table: table,
+      object: object,
+    });
+
+    const response = await axios({
+      method: "DELETE",
+      url: `${baseUrl}/remove`,
+      data: data,
+      headers: headersJson,
+    });
+
+    return response.data;
+  },
 };

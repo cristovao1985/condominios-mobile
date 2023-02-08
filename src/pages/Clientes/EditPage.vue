@@ -21,6 +21,22 @@
             v-if="item.form"
           />
         </template>
+        <template v-else-if="item.form && item.type === 'mobile'">
+          <q-input
+            v-model="object[item.field]"
+            :label="item.field"
+            v-if="item.form"
+            mask="(##)#####-####"
+          />
+        </template>
+        <template v-else-if="item.form && item.type === 'phone'">
+          <q-input
+            v-model="object[item.field]"
+            :label="item.field"
+            v-if="item.form"
+            mask="(##)####-####"
+          />
+        </template>
         <template v-else>
 
           <q-input
@@ -74,7 +90,7 @@
 </template>
 <script>
 import baseApi from "src/api/base/base.api";
-import productsModel from "../../models/produtos";
+import clientesModel from "../../models/clientes";
 export default {
   name: "EditPage",
   props: {
@@ -96,8 +112,8 @@ export default {
         CATEGORIA: [],
         SUBCATEGORIA: [],
       },
-      model: [...productsModel],
-      tableName:'produtos'
+      model: [...clientesModel],
+      tableName:'clientes'
     };
   },
   mounted() {

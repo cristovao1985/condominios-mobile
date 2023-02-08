@@ -5,11 +5,12 @@
     :columns="columns"
     row-key="id"
     :filter="search"
+    class="my-sticky-column-table"
   >
     <template v-slot:top-left>
       <q-input
         v-model="search"
-        label="Pesquisar produto"
+        label="Pesquisar"
         clearable
         placeholder="Digite o nome"
       />
@@ -26,13 +27,27 @@
     </template>
     <template v-slot:body-cell-NOME="item">
       <td>
-        <q-btn flat color="primary" :label="item.row.NOME">
+        <q-btn
+          flat
+          color="primary"
+          :label="item.row.NOME"
+          @click="edit(true, item.row)"
+        >
           <q-tooltip v-if="item.row.DESCRICAO">
             {{ item.row.DESCRICAO }}
           </q-tooltip>
         </q-btn>
       </td>
     </template>
+
+    <template v-slot:body-cell-ATIVO="item">
+      <td>
+        <q-chip :color="item.row.ATIVO ? 'green' : 'red'" text-color="white">
+          {{ item.row.ATIVO ? "ATIVO" : "INATIVO" }}
+        </q-chip>
+      </td>
+    </template>
+
     <template v-slot:body-cell-ACTIONS="item">
       <td>
         <q-btn
@@ -116,3 +131,22 @@ export default {
   },
 };
 </script>
+<style lang="sass">
+.my-sticky-column-table
+  /* specifying max-width so the example can
+    highlight the sticky column on any browser window */
+
+
+  thead tr:first-child th:first-child
+    /* bg color is important for th; just specify one */
+    background-color: #fff
+
+  td:first-child
+    background-color: #cecece
+
+  th:first-child,
+  td:first-child
+    position: sticky
+    left: 0
+    z-index: 1
+</style>

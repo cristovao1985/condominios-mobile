@@ -4,14 +4,14 @@
       :title="'Controle de clientes'"
       :data="data"
       :columns="columns"
-      :editPath="'editClient'"
+      :editPath="'editFornecedor'"
     />
   </q-page>
 </template>
 <script>
 import baseApi from "src/api/base/base.api";
 import TableBasic from "src/components/TableBasic.vue";
-import clientesModel from "../../models/clientes";
+import fornecedoresModel from "../../models/fornecedores";
 export default {
   name: "ProductsPage",
   components: {
@@ -20,8 +20,8 @@ export default {
   data() {
     return {
       data: [],
-      columns: clientesModel,
-      tableName:'clientes'
+      columns: fornecedoresModel,
+      tableName:'fornecedores'
     };
   },
   created() {

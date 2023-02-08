@@ -10,12 +10,8 @@
           aria-label="Menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
-
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
+        <q-toolbar-title> Mini PDV </q-toolbar-title>
+        <div>v.BETA</div>
       </q-toolbar>
     </q-header>
 
@@ -26,10 +22,7 @@
       content-class="bg-grey-1"
     >
       <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
+        <q-item-label header class="text-grey-8">
           Essential Links
         </q-item-label>
         <EssentialLink
@@ -47,40 +40,45 @@
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
+import EssentialLink from "components/EssentialLink.vue";
 
 const linksData = [
-{
-    title: 'Home',
-    caption: 'Página inicial',
-    icon: 'home',
-    link: '#/home'
+  {
+    title: "Home",
+    caption: "Página inicial",
+    icon: "home",
+    link: "#/home",
   },
   {
-    title: 'Produtos',
-    caption: 'Controle de produtos',
-    icon: 'shopping_cart',
-    link: '#/products'
+    title: "Produtos",
+    caption: "Controle de produtos",
+    icon: "shopping_cart",
+    link: "#/produtos",
   },
-
   {
-    title: 'Clientes',
-    caption: 'Controle de clientes',
-    icon: 'people',
-    link: '#/clientes'
-  }
-]
+    title: "Clientes",
+    caption: "Controle de clientes",
+    icon: "people",
+    link: "#/clientes",
+  },
+  {
+    title: "Fornecedores",
+    caption: "Controle de Fornecedores",
+    icon: "business_center",
+    link: "#/fornecedores",
+  },
+];
 
 export default {
-  name: 'MainLayout',
+  name: "MainLayout",
   components: {
-    EssentialLink
+    EssentialLink,
   },
-  data () {
+  data() {
     return {
       leftDrawerOpen: false,
-      essentialLinks: linksData
-    }
-  }
-}
+      essentialLinks: linksData,
+    };
+  },
+};
 </script>

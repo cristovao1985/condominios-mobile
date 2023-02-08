@@ -1,6 +1,13 @@
 <template>
   <q-page class="q-ma-md">
-    <h6>{{ edit? `Editar registro #${data.ID}`:'Inserir registro' }}</h6>
+    <RemoveConfirmationModal
+      v-if="edit"
+      :show="showModalRemove"
+      :object="object"
+      :table="tableName"
+      @closeModal="closeModalRemove"
+    />
+    <h6>{{ edit ? `Editar registro #${data.ID}` : "Inserir registro" }}</h6>
     <q-form @submit="saveProduct" ref="form" class="q-gutter-md">
       <div v-for="item in model" :key="item.id">
         <template v-if="item.form && item.type === 'checkbox'">
@@ -21,8 +28,15 @@
             v-if="item.form"
           />
         </template>
+        <template v-else-if="item.form && item.type === 'phone'">
+          <q-input
+            v-model="object[item.field]"
+            :label="item.field"
+            v-if="item.form"
+            mask="(##)####-####"
+          />
+        </template>
         <template v-else>
-
           <q-input
             v-model="object[item.field]"
             :label="item.field"
@@ -68,13 +82,21 @@
       </div>
     </q-form>
     <div class="q-mt-md">
-      <q-btn label="Remover registro" outline class="full-width" color="red" v-if="edit"/>
+      <q-btn
+      v-if="edit"
+        label="Remover registro"
+        outline
+        class="full-width"
+        color="red"
+        @click="openModalRemove"
+      />
     </div>
   </q-page>
 </template>
 <script>
 import baseApi from "src/api/base/base.api";
-import productsModel from "../../models/produtos";
+import fornecedoresModel from "../../models/fornecedores";
+import RemoveConfirmationModal from "src/components/RemoveConfirmationModal.vue";
 export default {
   name: "EditPage",
   props: {
@@ -89,6 +111,7 @@ export default {
       type: Object,
     },
   },
+  components: { RemoveConfirmationModal },
   data() {
     return {
       object: { ...(this.data || {}) },
@@ -96,8 +119,9 @@ export default {
         CATEGORIA: [],
         SUBCATEGORIA: [],
       },
-      model: [...productsModel],
-      tableName:'produtos'
+      model: [...fornecedoresModel],
+      tableName: "fornecedores",
+      showModalRemove: false,
     };
   },
   mounted() {
@@ -160,6 +184,12 @@ export default {
           });
         })
         .catch((error) => {});
+    },
+    openModalRemove() {
+      this.showModalRemove = true;
+    },
+    closeModalRemove() {
+      this.showModalRemove = false;
     },
   },
 };

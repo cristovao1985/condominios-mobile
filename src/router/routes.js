@@ -5,8 +5,8 @@ const routes = [
     children: [
       { path: "/home", component: () => import("pages/Index.vue") },
       {
-        path: "/products",
-        name: "products",
+        path: "/produtos",
+        name: "produtos",
         component: () => import("pages/Produtos/ListPage.vue"),
       },
       {
@@ -17,7 +17,25 @@ const routes = [
       },
       {
         path: "/clientes",
+        name:'clientes',
         component: () => import("pages/Clientes/ListPage.vue"),
+      },
+      {
+        path: "/editClient",
+        name: "editClient",
+        component: () => import("pages/Clientes/EditPage.vue"),
+        props: true,
+      },
+      {
+        path: "/fornecedores",
+        name:'fornecedores',
+        component: () => import("pages/Fornecedores/ListPage.vue"),
+      },
+      {
+        path: "/editFornecedor",
+        name: "editFornecedor",
+        component: () => import("pages/Fornecedores/EditPage.vue"),
+        props: true,
       },
     ],
   },
