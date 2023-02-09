@@ -50,6 +50,12 @@ const linksData = [
     link: "#/home",
   },
   {
+    title: "Vendas",
+    caption: "Controle de vendas",
+    icon: "shopping_cart",
+    link: "#/vendas",
+  },
+  {
     title: "Produtos",
     caption: "Controle de produtos",
     icon: "shopping_cart",

@@ -15,36 +15,16 @@
         placeholder="Digite o nome"
       />
     </template>
-    <template v-slot:top-right>
-      <q-btn
-        round
-        color="primary"
-        icon="add"
-        class="q-ma-md"
-        @click="edit(false)"
-      />
-      <q-btn color="green" round icon="file_download" @click="exportTable" />
-    </template>
-    <template v-slot:body-cell-NOME="item">
-      <td>
-        <q-btn
-          flat
-          color="primary"
-          :label="item.row.NOME"
-          @click="edit(true, item.row)"
-        >
-          <q-tooltip v-if="item.row.DESCRICAO">
-            {{ item.row.DESCRICAO }}
-          </q-tooltip>
-        </q-btn>
-      </td>
-    </template>
-
     <template v-slot:body-cell-ATIVO="item">
       <td>
         <q-chip :color="item.row.ATIVO ? 'green' : 'red'" text-color="white">
           {{ item.row.ATIVO ? "ATIVO" : "INATIVO" }}
         </q-chip>
+      </td>
+    </template>
+    <template v-slot:body-cell-QUANTIDADE="item" v-if="canEditQtde">
+      <td>
+        <q-input type="number" v-model="item.row.QUANTIDADE" @input="changeValue(item.row)"/>
       </td>
     </template>
     <template v-slot:body-cell-PAGO="item">
@@ -57,14 +37,6 @@
 
     <template v-slot:body-cell-ACTIONS="item">
       <td>
-        <q-btn
-          size="10px"
-          round
-          color="primary"
-          icon="edit"
-          @click="edit(true, item.row)"
-          v-if="showEditButton"
-        />
         <q-btn
           size="10px"
           round
@@ -104,23 +76,19 @@ export default {
       type: Array,
       required: true,
     },
-    editPath: {
-      type: String,
-      required: true,
-    },
     showDeleteButton: {
       type: Boolean,
     },
     showAddButton: {
       type: Boolean,
     },
-    showEditButton: {
+    canEditQtde: {
       type: Boolean,
     },
   },
   data() {
     return {
-      search: "",
+      search: ""
     };
   },
   methods: {
@@ -155,18 +123,18 @@ export default {
         });
       }
     },
-    edit(edit, object) {
-      this.$router.push({
-        name: this.editPath,
-        params: { data: object, edit: edit },
-      });
-    },
     add(item) {
       this.$emit("add", item);
     },
     remove(item) {
       this.$emit("remove", item);
     },
+    searchItem() {
+      this.$emit("openModal");
+    },
+    changeValue(item){
+      console.log('changeValue',item)
+    }
   },
 };
 </script>

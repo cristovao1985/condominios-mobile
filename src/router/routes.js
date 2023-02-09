@@ -37,6 +37,18 @@ const routes = [
         component: () => import("pages/Fornecedores/EditPage.vue"),
         props: true,
       },
+      {
+        path: "/vendas",
+        name:'vendas',
+        component: () => import("pages/Vendas/ListPage.vue"),
+      },
+      {
+        path: "/editVendas",
+        name: "editVendas",
+        component: () => import("pages/Vendas/EditPage.vue"),
+        props: true,
+      },
+
     ],
   },
 
