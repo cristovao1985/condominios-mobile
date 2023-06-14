@@ -1,14 +1,15 @@
 import axios from "axios";
-const baseUrl = "http://localhost:9000/.netlify/functions/api/vendas";
+const baseUrl = "http://192.168.0.109:9000/.netlify/functions/api/despesas";
 const headersJson = {
   Authorization: "Basic MTEyMzQ1Njc4OTA6MDk4NzY1NDMyMTE=",
   "Content-Type": "application/json",
 };
 
 export default {
-  get: async (table) => {
+  get: async (table, order) => {
     var data = JSON.stringify({
-      table: table,
+      table,
+      order,
     });
 
     const response = await axios({

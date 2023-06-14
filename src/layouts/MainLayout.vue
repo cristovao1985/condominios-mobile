@@ -10,7 +10,7 @@
           aria-label="Menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
         />
-        <q-toolbar-title> Mini PDV </q-toolbar-title>
+        <q-toolbar-title> Morada do Sol </q-toolbar-title>
         <div>v.BETA</div>
       </q-toolbar>
     </q-header>
@@ -23,7 +23,7 @@
     >
       <q-list>
         <q-item-label header class="text-grey-8">
-          Essential Links
+          Controle de Condomínio
         </q-item-label>
         <EssentialLink
           v-for="link in essentialLinks"
@@ -50,29 +50,30 @@ const linksData = [
     link: "#/home",
   },
   {
-    title: "Vendas",
-    caption: "Controle de vendas",
-    icon: "shopping_cart",
-    link: "#/vendas",
-  },
-  {
-    title: "Produtos",
-    caption: "Controle de produtos",
-    icon: "shopping_cart",
-    link: "#/produtos",
-  },
-  {
-    title: "Clientes",
-    caption: "Controle de clientes",
+    title: "Condominos",
+    caption: "Controle de condominos",
     icon: "people",
-    link: "#/clientes",
+    link: "#/condominos",
   },
   {
-    title: "Fornecedores",
-    caption: "Controle de Fornecedores",
-    icon: "business_center",
-    link: "#/fornecedores",
+    title: "Veículos",
+    caption: "Controle de veiculos",
+    icon: "drive_eta",
+    link: "#/veiculos",
   },
+  {
+    title: "Receitas",
+    caption: "Entrada de receitas",
+    icon: "attach_money",
+    link: "#/receitas",
+  },
+  {
+    title: "Despesas",
+    caption: "Despesas do condomínio",
+    icon: "money_off_csred",
+    link: "#/despesas",
+  },
+
 ];
 
 export default {

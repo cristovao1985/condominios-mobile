@@ -5,50 +5,49 @@ const routes = [
     children: [
       { path: "/home", component: () => import("pages/Index.vue") },
       {
-        path: "/produtos",
-        name: "produtos",
-        component: () => import("pages/Produtos/ListPage.vue"),
+        path: "/condominos",
+        name: "condominos",
+        component: () => import("pages/Condominos/Index.vue"),
       },
       {
-        path: "/editProduct",
-        name: "editProduct",
-        component: () => import("pages/Produtos/EditPage.vue"),
+        path: "/condomino",
+        name: "condomino",
         props: true,
+        component: () => import("pages/Condominos/Condomino.vue"),
       },
       {
-        path: "/clientes",
-        name:'clientes',
-        component: () => import("pages/Clientes/ListPage.vue"),
+        path: "/veiculos",
+        name: "veiculos",
+        component: () => import("pages/Veiculos/Index.vue"),
       },
       {
-        path: "/editClient",
-        name: "editClient",
-        component: () => import("pages/Clientes/EditPage.vue"),
+        path: "/veiculo",
+        name: "veiculo",
         props: true,
+        component: () => import("pages/Veiculos/Veiculo.vue"),
       },
       {
-        path: "/fornecedores",
-        name:'fornecedores',
-        component: () => import("pages/Fornecedores/ListPage.vue"),
+        path: "/receitas",
+        name: "receitas",
+        component: () => import("pages/Receitas/Index.vue"),
       },
       {
-        path: "/editFornecedor",
-        name: "editFornecedor",
-        component: () => import("pages/Fornecedores/EditPage.vue"),
+        path: "/receita",
+        name: "receita",
         props: true,
+        component: () => import("pages/Receitas/Receita.vue"),
       },
       {
-        path: "/vendas",
-        name:'vendas',
-        component: () => import("pages/Vendas/ListPage.vue"),
+        path: "/despesas",
+        name: "despesas",
+        component: () => import("pages/Despesas/Index.vue"),
       },
       {
-        path: "/editVendas",
-        name: "editVendas",
-        component: () => import("pages/Vendas/EditPage.vue"),
+        path: "/despesa",
+        name: "despesa",
         props: true,
+        component: () => import("pages/Despesas/Despesa.vue"),
       },
-
     ],
   },
 
@@ -57,6 +56,18 @@ const routes = [
   {
     path: "*",
     component: () => import("pages/Error404.vue"),
+  },
+  {
+    path: "/recibo-receita",
+    name: "recibo-receita",
+    props: true,
+    component: () => import("pages/Receitas/Components/Recibo.vue"),
+  },
+  {
+    path: "/recibo-despesa",
+    name: "recibo-despesa",
+    props: true,
+    component: () => import("pages/Despesas/Components/Recibo.vue"),
   },
 ];
 

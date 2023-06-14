@@ -1,8 +1,8 @@
 {
-  "name": "minipdv-web",
+  "name": "condominios",
   "version": "0.0.1",
-  "description": "APlicação da loja",
-  "productName": "minipdv-web",
+  "description": "Controle de condominios",
+  "productName": "condominios",
   "author": "Cristovao Jandson <cristovaojandson@gmail.com>",
   "private": true,
   "scripts": {
