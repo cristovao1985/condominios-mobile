@@ -54,11 +54,14 @@ export default {
         .get(this.tableName, "nome")
         .then((result) => {
           this.condominos = result.data;
-
           this.loading = false;
         })
         .catch((error) => {
           console.log(error);
+          ShowToastMixin.showToast(
+            error.data.message || "Houve um erro na sua requisição",
+            "negative"
+          );
           this.loading = false;
         });
     },
