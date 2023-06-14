@@ -71,7 +71,7 @@ module.exports = function (/* ctx */) {
 
     // Full list of options: https://v1.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
     devServer: {
-      https: false,
+      https: true,
       port: 8080,
       open: true, // opens browser window automatically
     },
@@ -79,7 +79,7 @@ module.exports = function (/* ctx */) {
     // https://v1.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
     framework: {
       iconSet: "material-icons", // Quasar icon set
-      lang: "en-us", // Quasar language pack
+      lang: "pt-br", // Quasar language pack
       config: {},
 
       // Possible values for "importStrategy":
@@ -112,9 +112,9 @@ module.exports = function (/* ctx */) {
       workboxPluginMode: "GenerateSW", // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: `minipdv-web`,
-        short_name: `minipdv-web`,
-        description: `APlicação da loja`,
+        name: `condominios`,
+        short_name: `condominios`,
+        description: `Controle de condomínio`,
         display: "standalone",
         orientation: "portrait",
         background_color: "#ffffff",
@@ -177,7 +177,7 @@ module.exports = function (/* ctx */) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: "minipdv-web",
+        appId: "condominios",
       },
 
       // More info: https://v1.quasar.dev/quasar-cli/developing-electron-apps/node-integration
