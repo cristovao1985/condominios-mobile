@@ -79,7 +79,7 @@ module.exports = function (/* ctx */) {
     // https://v1.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-framework
     framework: {
       iconSet: "material-icons", // Quasar icon set
-      lang: "pt-br", // Quasar language pack
+      lang: "en-us", // Quasar language pack
       config: {},
 
       // Possible values for "importStrategy":
@@ -114,7 +114,7 @@ module.exports = function (/* ctx */) {
       manifest: {
         name: `condominios`,
         short_name: `condominios`,
-        description: `Controle de condomínio`,
+        description: `Controle de Condomínio`,
         display: "standalone",
         orientation: "portrait",
         background_color: "#ffffff",

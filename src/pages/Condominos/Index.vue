@@ -57,7 +57,6 @@ export default {
           this.loading = false;
         })
         .catch((error) => {
-          console.log(error);
           ShowToastMixin.showToast(
             error.data.message || "Houve um erro na sua requisição",
             "negative"
