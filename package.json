@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "quasar dev",
     "build": "quasar build",
-    "build:pwa": "quasar build -m pwa -d"
+    "build:pwa": "quasar build"
   },
   "dependencies": {
     "axios": "^0.21.1",
