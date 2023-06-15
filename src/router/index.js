@@ -35,17 +35,17 @@ export default route(function (/* { store, ssrContext } */) {
     ),
   });
 
-  Router.beforeEach((to, from, next) => {
-    var tokenStr = JSON.parse(localStorage.getItem("user"));
+  // Router.beforeEach((to, from, next) => {
+  //   var tokenStr = JSON.parse(localStorage.getItem("user"));
 
-    if (to.path === "/auth") {
-      next();
-    } else if (!tokenStr || !tokenStr.uid) {
-      next("/auth");
-    } else {
-      next();
-    }
-  });
+  //   if (to.path === "/auth") {
+  //     next();
+  //   } else if (!tokenStr || !tokenStr.uid) {
+  //     next("/auth");
+  //   } else {
+  //     next();
+  //   }
+  // });
 
   return Router;
 });
