@@ -1,3 +1,6 @@
+import ReciboReceita from "../pages/Receitas/components/Recibo.vue"
+import ReciboDespesa from "../pages/Despesas/components/Recibo.vue"
+
 const routes = [
   {
     path: "/",
@@ -61,13 +64,13 @@ const routes = [
     path: "/recibo-receita",
     name: "recibo-receita",
     props: true,
-    component: () => import("pages/Receitas/Components/Recibo.vue"),
+    component: ReciboReceita,
   },
   {
     path: "/recibo-despesa",
     name: "recibo-despesa",
     props: true,
-    component: () => import("pages/Despesas/Components/Recibo.vue"),
+    component: ReciboDespesa,
   },
 ];
 
