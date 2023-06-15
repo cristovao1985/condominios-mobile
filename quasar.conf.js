@@ -147,9 +147,9 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: `PrestCert App`,
-        short_name: `PrestCert App`,
-        description: `PrestCert App`,
+        name: `Condominios`,
+        short_name: `Condominios`,
+        description: `Controle de Condominios`,
         display: "standalone",
         orientation: "portrait",
         background_color: "#ffffff",
