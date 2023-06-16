@@ -147,9 +147,9 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: `PrestCert App`,
-        short_name: `PrestCert App`,
-        description: `PrestCert App`,
+        name: `Controle de Condominios`,
+        short_name: `Controle de Condominios`,
+        description: `Controle de Condominios`,
         display: "standalone",
         orientation: "portrait",
         background_color: "#ffffff",
@@ -213,7 +213,7 @@ module.exports = configure(function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: "prestcert-app",
+        appId: "controle-condominios",
       },
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
