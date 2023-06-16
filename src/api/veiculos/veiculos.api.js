@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "http://192.168.0.109:9000/.netlify/functions/api/veiculos";
+const baseUrl = "https://netflify-demo.netlify.app/.netlify/functions/api/veiculos";
 const headersJson = {
   Authorization: "Basic MTEyMzQ1Njc4OTA6MDk4NzY1NDMyMTE=",
   "Content-Type": "application/json",

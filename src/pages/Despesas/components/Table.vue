@@ -2,7 +2,7 @@
   <div class="q-pa-md">
     <q-table
       title="Receitas"
-      :data="data"
+      :rows="data"
       :columns="columns"
       row-key="id"
       :filter="filter"

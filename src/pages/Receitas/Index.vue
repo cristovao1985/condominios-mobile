@@ -31,7 +31,7 @@ export default {
   components: {
     TableReceitas,
     DeleteReceitaModal,
-    TableSkeleton
+    TableSkeleton,
   },
   data() {
     return {
@@ -65,12 +65,12 @@ export default {
         });
     },
     addReceita() {
-      this.$router.push({ name: "receita", params: { edit: false } });
+      this.$router.push({ name: "receita" });
     },
     editReceita(receita) {
       this.$router.push({
         name: "receita",
-        params: { edit: true, data: receita },
+        params: { id: receita.id },
       });
     },
     async deleteReceita(receita) {

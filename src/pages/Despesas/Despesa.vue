@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-ma-md">
-    <h6>{{ edit ? `Editar registro #${data.id}` : "Inserir registro" }}</h6>
+    <h6>{{ edit ? `Editar registro #${object.id}` : "Inserir registro" }}</h6>
     <q-form @submit="saveDespesa" ref="form" class="q-gutter-md">
       <q-input
         v-model="object.beneficiario"
@@ -59,30 +59,19 @@ import baseApi from "src/api/base/base.api";
 import ShowToastMixin from "../../mixins/notify";
 export default {
   name: "Receita",
-  props: {
-    edit: {
-      type: Boolean,
-      required: true,
-      default: () => {
-        return false;
-      },
-    },
-    data: {
-      type: Object,
-    },
-  },
   data() {
     return {
       object: {
-        ...(this.data || {
-          descricao: "Boleto",
-          valor: 0,
-          pago: 0,
-          data_pagamento: "",
-          mes: "",
-          beneficiario: "",
-        }),
+        descricao: "Boleto",
+        valor: 0,
+        pago: 0,
+        data_pagamento: "",
+        mes: "",
+        beneficiario: "",
+        categoria:"",
+        id:""
       },
+      edit: false,
       tableName: "despesas",
       condominos: [],
       meses: [
@@ -99,7 +88,14 @@ export default {
         "NOVEMBRO",
         "DEZEMBRO",
       ],
-      categorias: ["DESPESAS GERAIS","ÁGUA","ENERGIA","PRESTADORES DE SERVIÇOS","MATERIAL DE ESCRITÓRIO","TRANSPORTE"]
+      categorias: [
+        "DESPESAS GERAIS",
+        "ÁGUA",
+        "ENERGIA",
+        "PRESTADORES DE SERVIÇOS",
+        "MATERIAL DE ESCRITÓRIO",
+        "TRANSPORTE",
+      ],
     };
   },
   computed: {
@@ -108,14 +104,22 @@ export default {
     },
   },
   mixins: [ShowToastMixin],
-  created() {
-    if (this.edit) {
-      this.object.data_pagamento = this.data.data_pagamento.substring(0, 10);
+  async created() {
+    if (this.$route.params.id) {
+      this.edit = true;
+      await this.getDespesa();
+      if (this.edit) {
+        this.object.data_pagamento = this.object.data_pagamento.substring(0, 10);
+      } else {
+        this.object.mes = new Date()
+          .toLocaleString("pt-br", { month: "long" })
+          .toUpperCase();
+        this.object.data_pagamento = new Date().toISOString().split("T")[0];
+      }
     } else {
-      this.object.mes = new Date()
-        .toLocaleString("pt-br", { month: "long" })
-        .toUpperCase();
-      this.object.data_pagamento = new Date().toISOString().split("T")[0];
+      this.edit = false;
+      this.object = {};
+      //this.backToList();
     }
   },
   methods: {
@@ -164,6 +168,15 @@ export default {
     },
     backToList() {
       this.$router.push({ name: this.tableName });
+    },
+    async getDespesa() {
+      await baseApi
+        .getById(this.tableName, this.$route.params.id)
+        .then((result) => {
+          if (result.data.length) {
+            this.object = result.data[0];
+          }
+        });
     },
   },
 };

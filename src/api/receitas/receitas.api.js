@@ -1,5 +1,6 @@
 import axios from "axios";
-const baseUrl = "http://192.168.0.109:9000/.netlify/functions/api/receitas";
+const baseUrl =
+  "https://netflify-demo.netlify.app/.netlify/functions/api/receitas";
 const headersJson = {
   Authorization: "Basic MTEyMzQ1Njc4OTA6MDk4NzY1NDMyMTE=",
   "Content-Type": "application/json",
@@ -15,6 +16,20 @@ export default {
     const response = await axios({
       method: "POST",
       url: `${baseUrl}`,
+      data: data,
+      headers: headersJson,
+    });
+
+    return response.data;
+  },
+  getById: async (table, id) => {
+    var data = JSON.stringify({
+      table,
+    });
+
+    const response = await axios({
+      method: "POST",
+      url: `${baseUrl}/${id}`,
       data: data,
       headers: headersJson,
     });

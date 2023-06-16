@@ -63,12 +63,12 @@ export default {
         });
     },
     addVeiculo() {
-      this.$router.push({ name: "veiculo", params: { edit: false } });
+      this.$router.push({ name: "veiculo" });
     },
     editVeiculo(veiculo) {
       this.$router.push({
         name: "veiculo",
-        params: { edit: true, data: veiculo },
+        params: { id: veiculo.id },
       });
     },
     async deleteVeiculo(veiculo) {

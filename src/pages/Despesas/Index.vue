@@ -30,7 +30,7 @@ export default {
   components: {
     TableDespesas,
     DeleteDespesaModal,
-    TableSkeleton
+    TableSkeleton,
   },
   data() {
     return {
@@ -64,12 +64,12 @@ export default {
         });
     },
     addDespesa() {
-      this.$router.push({ name: "despesa", params: { edit: false } });
+      this.$router.push({ name: "despesa" });
     },
     editDespesa(despesa) {
       this.$router.push({
         name: "despesa",
-        params: { edit: true, data: despesa },
+        params: { id: despesa.id },
       });
     },
     async deleteDespesa(despesa) {
@@ -101,7 +101,7 @@ export default {
         query: { data: JSON.stringify(despesa) },
         params: { data: JSON.stringify(despesa) },
       });
-      console.log(route);
+
       window.open(route.href, "_blank");
     },
   },

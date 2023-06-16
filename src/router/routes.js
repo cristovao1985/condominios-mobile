@@ -1,5 +1,6 @@
-import ReciboReceita from "../pages/Receitas/components/Recibo.vue"
-import ReciboDespesa from "../pages/Despesas/components/Recibo.vue"
+import ReciboReceita from "../pages/Receitas/components/Recibo.vue";
+import ReciboDespesa from "../pages/Despesas/components/Recibo.vue";
+import CondominoPage from "../pages/Condominos/Condomino.vue";
 
 const routes = [
   {
@@ -13,10 +14,10 @@ const routes = [
         component: () => import("pages/Condominos/Index.vue"),
       },
       {
-        path: "/condomino",
+        path: "/condomino/:id?",
         name: "condomino",
-        props: true,
-        component: () => import("pages/Condominos/Condomino.vue"),
+        component: CondominoPage,
+        props: true
       },
       {
         path: "/veiculos",
@@ -24,7 +25,7 @@ const routes = [
         component: () => import("pages/Veiculos/Index.vue"),
       },
       {
-        path: "/veiculo",
+        path: "/veiculo/:id?",
         name: "veiculo",
         props: true,
         component: () => import("pages/Veiculos/Veiculo.vue"),
@@ -35,7 +36,7 @@ const routes = [
         component: () => import("pages/Receitas/Index.vue"),
       },
       {
-        path: "/receita",
+        path: "/receita/:id?",
         name: "receita",
         props: true,
         component: () => import("pages/Receitas/Receita.vue"),
@@ -46,7 +47,7 @@ const routes = [
         component: () => import("pages/Despesas/Index.vue"),
       },
       {
-        path: "/despesa",
+        path: "/despesa/:id?",
         name: "despesa",
         props: true,
         component: () => import("pages/Despesas/Despesa.vue"),

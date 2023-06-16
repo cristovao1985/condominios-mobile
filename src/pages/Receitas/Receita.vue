@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-ma-md">
-    <h6>{{ edit ? `Editar registro #${data.id}` : "Inserir registro" }}</h6>
+    <h6>{{ edit ? `Editar registro #${object.id}` : "Inserir registro" }}</h6>
     <q-form @submit="saveReceita" ref="form" class="q-gutter-md">
       <q-select
         v-model="object.id_condomino"
@@ -57,34 +57,25 @@
 import baseApi from "src/api/base/base.api";
 
 import ShowToastMixin from "../../mixins/notify";
+import receitasApi from 'src/api/receitas/receitas.api';
 export default {
   name: "Receita",
-  props: {
-    edit: {
-      type: Boolean,
-      required: true,
-      default: () => {
-        return false;
-      },
-    },
-    data: {
-      type: Object,
-    },
-  },
   data() {
     return {
       object: {
-        ...(this.data || {
-          descricao: "Taxa de condomínio",
-          valor: 100,
-          pago: 1,
-          data_pagamento: "",
-          id_condomino: null,
-          mes: "",
-        }),
+        descricao: "Taxa de condomínio",
+        valor: 100,
+        pago: 1,
+        data_pagamento: "",
+        id_condomino: null,
+        mes: "",
+        condomino:"",
+        categoria:"",
+        id:""
       },
       tableName: "receitas",
       condominos: [],
+      edit: false,
       meses: [
         "JANEIRO",
         "FEVEREIRO",
@@ -99,7 +90,7 @@ export default {
         "NOVEMBRO",
         "DEZEMBRO",
       ],
-      categorias: ["TAXA DE CONDOMÍNIO","MULTAS","OUTROS"]
+      categorias: ["TAXA DE CONDOMÍNIO", "MULTAS", "OUTROS"],
     };
   },
   computed: {
@@ -108,16 +99,27 @@ export default {
     },
   },
   mixins: [ShowToastMixin],
-  created() {
+  async created() {
     this.getCondominos();
 
-    if (this.edit) {
-      this.object.data_pagamento = this.data.data_pagamento.substring(0, 10);
+    if (this.$route.params.id) {
+      this.edit = true;
+      await this.getReceita();
+      if (this.edit) {
+        this.object.data_pagamento = this.object.data_pagamento.substring(
+          0,
+          10
+        );
+      } else {
+        this.object.mes = new Date()
+          .toLocaleString("pt-br", { month: "long" })
+          .toUpperCase();
+        this.object.data_pagamento = new Date().toISOString().split("T")[0];
+      }
     } else {
-      this.object.mes = new Date()
-        .toLocaleString("pt-br", { month: "long" })
-        .toUpperCase();
-      this.object.data_pagamento = new Date().toISOString().split("T")[0];
+      this.edit = false;
+      this.object = {};
+      //this.backToList();
     }
   },
   methods: {
@@ -178,6 +180,15 @@ export default {
     },
     backToList() {
       this.$router.push({ name: this.tableName });
+    },
+    async getReceita() {
+      await receitasApi
+        .getById(this.tableName, this.$route.params.id)
+        .then((result) => {
+          if (result.data.length) {
+            this.object = result.data[0];
+          }
+        });
     },
   },
 };

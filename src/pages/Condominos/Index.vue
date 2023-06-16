@@ -65,12 +65,12 @@ export default {
         });
     },
     addCondomino() {
-      this.$router.push({ name: "condomino", params: { edit: false } });
+      this.$router.push({ name: "condomino" });
     },
     editCondomino(condomino) {
       this.$router.push({
         name: "condomino",
-        params: { edit: true, data: condomino },
+        params: { edit: true, id: condomino.id },
       });
     },
     async deleteCondomino(condomino) {
