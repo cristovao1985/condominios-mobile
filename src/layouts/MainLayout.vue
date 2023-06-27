@@ -73,7 +73,12 @@ const linksData = [
     icon: "money_off_csred",
     link: "#/despesas",
   },
-
+  {
+    title: "Relatórios",
+    caption: "Relatórios e prestação de contas",
+    icon: "request_page",
+    link: "#/relatorios",
+  },
 ];
 
 export default {

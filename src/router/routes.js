@@ -1,6 +1,7 @@
 import ReciboReceita from "../pages/Receitas/components/Recibo.vue";
 import ReciboDespesa from "../pages/Despesas/components/Recibo.vue";
 import CondominoPage from "../pages/Condominos/Condomino.vue";
+import PrestacaoContasMes from "../pages/Relatorios/components/PrestacaoContasMes";
 
 const routes = [
   {
@@ -17,7 +18,7 @@ const routes = [
         path: "/condomino/:id?",
         name: "condomino",
         component: CondominoPage,
-        props: true
+        props: true,
       },
       {
         path: "/veiculos",
@@ -52,6 +53,11 @@ const routes = [
         props: true,
         component: () => import("pages/Despesas/Despesa.vue"),
       },
+      {
+        path: "/relatorios",
+        name: "relatorios",
+        component: () => import("pages/Relatorios/Index.vue"),
+      },
     ],
   },
 
@@ -72,6 +78,12 @@ const routes = [
     name: "recibo-despesa",
     props: true,
     component: ReciboDespesa,
+  },
+  {
+    path: "/prestacao-contas-mes",
+    name: "prestacao-contas-mes",
+    props: true,
+    component: PrestacaoContasMes,
   },
 ];
 
