@@ -19,26 +19,34 @@
         />
       </div>
     </div>
+
     <div class="row">
-      <q-card class="col q-ma-sm q-pa-sm">
-        <strong class="text-primary">Condominos</strong>
-        <br />
-        {{ data.totalC }}
-      </q-card>
-      <q-card class="col q-ma-sm q-pa-sm">
-        <strong class="text-negative">Despesas</strong>
+      <q-card class="col q-ma-sm q-pa-sm text-center">
+        <q-btn flat color="negative" label="Despesas" to="/despesas" />
         <br />
         R${{ data.totalD }}
       </q-card>
-      <q-card class="col q-ma-sm q-pa-sm">
-        <strong class="text-positive">Receitas</strong>
+      <q-card class="col q-ma-sm q-pa-sm text-center">
+        <q-btn flat color="positive" label="Despesas" to="/receitas" />
         <br />
         R${{ data.totalR }}
       </q-card>
-      <q-card class="col q-ma-sm q-pa-sm">
-        <strong>Saldo</strong>
+      <q-card class="col q-ma-sm q-pa-sm text-center">
+        <q-btn flat label="Saldo" />
         <br />
         R${{ data.totalR - data.totalD }}
+      </q-card>
+    </div>
+    <div class="row">
+      <q-card class="col q-ma-sm q-pa-sm text-center">
+        <q-btn flat color="primary" label="Condôminos" to="/condominos" />
+        <br />
+        {{ data.totalC }}
+      </q-card>
+      <q-card class="col q-ma-sm q-pa-sm text-center">
+        <q-btn flat color="Secondary" label="Veículos" to="/veiculos" />
+        <br />
+        {{ data.totalV }}
       </q-card>
     </div>
   </q-page>
@@ -50,7 +58,7 @@ export default {
   name: "Home",
   data() {
     return {
-      data: { totalC: 0, totalD: 0, totalR: 0 },
+      data: { totalC: 0, totalD: 0, totalR: 0, totalV: 0 },
       meses: [
         "JANEIRO",
         "FEVEREIRO",

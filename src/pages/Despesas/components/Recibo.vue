@@ -1,15 +1,20 @@
 <template>
   <div>
     <div class="q-pa-xl text-center col" id="recibo">
-      <h6>Recibo de pagamento</h6>
+      <q-img
+        src="../../../../public/images/logo.png"
+        spinner-color="white"
+        style="height: 140px; max-width: 150px"
+      />
       <p>
         Condomínio Residencial Morada do Sol <br />
         Rua do Sol, 100 - Arcoverde - PE <br />
         CNPJ 19.767.835/0001-08
       </p>
+      <h6>Recibo de pagamento</h6>
       <p class="q-mt-xl">
         Declaramos para os devidos fins que no dia
-        {{ recibo.data_pagamento }} pagamos à
+        {{ dateFormat(recibo.data_pagamento) }} pagamos à
         <strong>{{ recibo.beneficiario }} </strong> a importância de
         <strong>R${{ recibo.valor }}</strong>
         referente à {{ recibo.descricao }}
@@ -25,7 +30,7 @@
   </div>
 </template>
 <script>
-import router from "src/router";
+import formaters from "../../../helpers/formaters";
 export default {
   name: "ReciboPage",
   data() {
@@ -40,6 +45,9 @@ export default {
   methods: {
     printPage() {
       window.print();
+    },
+    dateFormat(date) {
+      return formaters.date(date);
     },
   },
 };

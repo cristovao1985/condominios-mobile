@@ -32,12 +32,17 @@
           @click="add"
         />
       </template>
+      <template v-slot:body-cell-data_pagamento="props">
+        <td>
+          {{ dateFormat(props.row.data_pagamento) }}
+        </td>
+      </template>
       <template v-slot:body-cell-pago="props">
         <td>
-        <q-chip outline :color="props.row.pago ? 'positive' :'negative'" >
-          {{ props.row.pago ? 'PAGO' :'EM ABERTO' }}
-        </q-chip>
-      </td>
+          <q-chip outline :color="props.row.pago ? 'positive' : 'negative'">
+            {{ props.row.pago ? "PAGO" : "EM ABERTO" }}
+          </q-chip>
+        </td>
       </template>
       <template v-slot:body-cell-actions="props">
         <q-td :props="props">
@@ -69,7 +74,7 @@
   </div>
 </template>
 <script>
-import ref from "vue";
+import formaters from "../../../helpers/formaters";
 export default {
   name: "TableDespesas",
   props: {
@@ -148,6 +153,9 @@ export default {
     },
     recibo(despesa) {
       this.$emit("recibo", despesa);
+    },
+    dateFormat(date) {
+      return formaters.date(date);
     },
   },
 };

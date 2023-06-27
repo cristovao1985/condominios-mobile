@@ -75,7 +75,7 @@ export default {
         "NOVEMBRO",
         "DEZEMBRO",
       ],
-      anos: [2022, 2023, 2024],
+      anos: [2021, 2022, 2023, 2024, 2025, 2026],
       filter: {
         ano: new Date().getFullYear(),
         mes: new Date()

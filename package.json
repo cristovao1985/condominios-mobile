@@ -19,6 +19,7 @@
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-vue": "^9.0.0",
     "eslint-webpack-plugin": "^2.0.0",
+    "moment": "^2.29.4",
     "prettier": "^2.5.1",
     "quasar": "^2.6.0",
     "vue": "^3.0.0",

@@ -119,8 +119,12 @@ export default {
       }
     } else {
       this.edit = false;
-      this.object = {};
+      //this.object = {};
       //this.backToList();
+      this.object.mes = new Date()
+        .toLocaleString("pt-br", { month: "long" })
+        .toUpperCase();
+      this.object.data_pagamento = new Date().toISOString().split("T")[0];
     }
   },
   methods: {
@@ -134,6 +138,7 @@ export default {
     },
     async saveReceita() {
       this.$refs.form.validate().then(() => {
+        delete this.object.condomino;
         if (this.edit) {
           this.update();
           return;
@@ -150,6 +155,7 @@ export default {
         ShowToastMixin.showToast("Informe um mês de referência", "warning");
         return;
       }
+
       await baseApi
         .insert(this.tableName, this.object)
         .then(() => {

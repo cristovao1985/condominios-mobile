@@ -40,6 +40,7 @@
         label="Pago?"
         :true-value="1"
         :false-value="0"
+        :value="object.pago"
       />
 
       <div class="q-mt-md">
@@ -64,7 +65,7 @@ export default {
       object: {
         descricao: "Boleto",
         valor: 0,
-        pago: 0,
+        pago: true,
         data_pagamento: "",
         mes: "",
         beneficiario: "",
@@ -122,8 +123,12 @@ export default {
       }
     } else {
       this.edit = false;
-      this.object = {};
+      //this.object = {};
       //this.backToList();
+      this.object.mes = new Date()
+        .toLocaleString("pt-br", { month: "long" })
+        .toUpperCase();
+      this.object.data_pagamento = new Date().toISOString().split("T")[0];
     }
   },
   methods: {

@@ -32,6 +32,11 @@
           @click="add"
         />
       </template>
+      <template v-slot:body-cell-data_pagamento="props">
+        <td>
+          {{ dateFormat(props.row.data_pagamento) }}
+        </td>
+      </template>
       <template v-slot:body-cell-actions="props">
         <q-td :props="props">
           <q-btn
@@ -61,7 +66,7 @@
   </div>
 </template>
 <script>
-import ref from "vue";
+import formaters from "../../../helpers/formaters";
 export default {
   name: "TableCondominos",
   props: {
@@ -139,6 +144,9 @@ export default {
     },
     recibo(receita) {
       this.$emit("recibo", receita);
+    },
+    dateFormat(date) {
+      return formaters.date(date);
     },
   },
 };

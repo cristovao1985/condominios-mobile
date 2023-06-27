@@ -44,6 +44,7 @@ import TableDespesas from "../Despesas/components/Table.vue";
 import DeleteDespesaModal from "./components/DeleteDespesaModal.vue";
 import ShowToastMixin from "../../mixins/notify";
 import TableSkeleton from "src/components/TableSkeleton.vue";
+
 export default {
   name: "IndexPage",
   components: {
@@ -75,7 +76,7 @@ export default {
         "NOVEMBRO",
         "DEZEMBRO",
       ],
-      anos: [2022, 2023, 2024],
+      anos: [2021, 2022, 2023, 2024, 2025, 2026],
       filter: {
         ano: new Date().getFullYear(),
         mes: new Date()
