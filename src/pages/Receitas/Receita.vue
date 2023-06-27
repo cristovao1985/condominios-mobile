@@ -57,7 +57,7 @@
 import baseApi from "src/api/base/base.api";
 
 import ShowToastMixin from "../../mixins/notify";
-import receitasApi from 'src/api/receitas/receitas.api';
+import receitasApi from "src/api/receitas/receitas.api";
 export default {
   name: "Receita",
   data() {
@@ -69,9 +69,10 @@ export default {
         data_pagamento: "",
         id_condomino: null,
         mes: "",
-        condomino:"",
-        categoria:"",
-        id:""
+        condomino: "",
+        categoria: "",
+        id: "",
+        ano: new Date().getFullYear(),
       },
       tableName: "receitas",
       condominos: [],

@@ -1,6 +1,24 @@
 <template>
   <q-page class="q-ma-md">
     <h6>Controle de despesas</h6>
+    <div class="row">
+      <div class="col q-ma-sm">
+        <q-select
+          v-model="filter.ano"
+          :options="anos"
+          label="Ano base"
+          required
+        />
+      </div>
+      <div class="col q-ma-sm">
+        <q-select
+          v-model="filter.mes"
+          :options="meses"
+          label="Mês de referência"
+          required
+        />
+      </div>
+    </div>
     <TableSkeleton v-if="loading" />
     <TableDespesas
       :data="despesas"
@@ -21,6 +39,7 @@
 
 <script>
 import baseApi from "src/api/base/base.api";
+import despesasApi from "src/api/despesas/despesas.api";
 import TableDespesas from "../Despesas/components/Table.vue";
 import DeleteDespesaModal from "./components/DeleteDespesaModal.vue";
 import ShowToastMixin from "../../mixins/notify";
@@ -42,17 +61,46 @@ export default {
         delete: false,
       },
       despesa: {},
+      meses: [
+        "JANEIRO",
+        "FEVEREIRO",
+        "MARÇO",
+        "ABRIL",
+        "MAIO",
+        "JUNHO",
+        "JULHO",
+        "AGOSTO",
+        "SETEMBRO",
+        "OUTUBRO",
+        "NOVEMBRO",
+        "DEZEMBRO",
+      ],
+      anos: [2022, 2023, 2024],
+      filter: {
+        ano: new Date().getFullYear(),
+        mes: new Date()
+          .toLocaleString("pt-br", { month: "long" })
+          .toUpperCase(),
+      },
     };
   },
   created() {
     this.getAll();
   },
   mixins: [ShowToastMixin],
+  watch: {
+    "filter.mes"() {
+      this.getAll();
+    },
+    "filter.ano"() {
+      this.getAll();
+    },
+  },
   methods: {
     async getAll() {
       this.loading = true;
-      await baseApi
-        .get(this.tableName, "id")
+      await despesasApi
+        .get(this.tableName, "id", this.filter.ano, this.filter.mes)
         .then((result) => {
           this.despesas = result.data;
 

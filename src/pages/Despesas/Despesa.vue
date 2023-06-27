@@ -68,8 +68,9 @@ export default {
         data_pagamento: "",
         mes: "",
         beneficiario: "",
-        categoria:"",
-        id:""
+        categoria: "",
+        id: "",
+        ano: new Date().getFullYear(),
       },
       edit: false,
       tableName: "despesas",
@@ -109,7 +110,10 @@ export default {
       this.edit = true;
       await this.getDespesa();
       if (this.edit) {
-        this.object.data_pagamento = this.object.data_pagamento.substring(0, 10);
+        this.object.data_pagamento = this.object.data_pagamento.substring(
+          0,
+          10
+        );
       } else {
         this.object.mes = new Date()
           .toLocaleString("pt-br", { month: "long" })

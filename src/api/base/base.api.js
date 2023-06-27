@@ -7,7 +7,7 @@ const headersJson = {
 };
 
 export default {
-  get: async (table, order="id") => {
+  get: async (table, order = "id") => {
     var data = JSON.stringify({
       table,
       order,

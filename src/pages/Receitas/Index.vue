@@ -1,6 +1,24 @@
 <template>
   <q-page class="q-ma-md">
     <h6>Controle de receitas</h6>
+    <div class="row">
+      <div class="col q-ma-sm">
+        <q-select
+          v-model="filter.ano"
+          :options="anos"
+          label="Ano base"
+          required
+        />
+      </div>
+      <div class="col q-ma-sm">
+        <q-select
+          v-model="filter.mes"
+          :options="meses"
+          label="Mês de referência"
+          required
+        />
+      </div>
+    </div>
     <TableSkeleton v-if="loading" />
     <TableReceitas
       :data="receitas"
@@ -43,17 +61,46 @@ export default {
         delete: false,
       },
       receita: {},
+      meses: [
+        "JANEIRO",
+        "FEVEREIRO",
+        "MARÇO",
+        "ABRIL",
+        "MAIO",
+        "JUNHO",
+        "JULHO",
+        "AGOSTO",
+        "SETEMBRO",
+        "OUTUBRO",
+        "NOVEMBRO",
+        "DEZEMBRO",
+      ],
+      anos: [2022, 2023, 2024],
+      filter: {
+        ano: new Date().getFullYear(),
+        mes: new Date()
+          .toLocaleString("pt-br", { month: "long" })
+          .toUpperCase(),
+      },
     };
   },
   created() {
     this.getAll();
   },
   mixins: [ShowToastMixin],
+  watch: {
+    "filter.mes"() {
+      this.getAll();
+    },
+    "filter.ano"() {
+      this.getAll();
+    },
+  },
   methods: {
     async getAll() {
       this.loading = true;
       await receitasApi
-        .get(this.tableName, "data_pagamento")
+        .get(this.tableName, "data_pagamento", this.filter.ano, this.filter.mes)
         .then((result) => {
           this.receitas = result.data;
 
