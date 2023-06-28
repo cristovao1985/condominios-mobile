@@ -30,6 +30,13 @@
           :key="link.title"
           v-bind="link"
         />
+        <q-btn
+          flat
+          label="Sair "
+          icon="logout"
+          class="text-negative"
+          @click="loggout"
+        />
       </q-list>
     </q-drawer>
 
@@ -41,7 +48,7 @@
 
 <script>
 import EssentialLink from "components/EssentialLink.vue";
-
+import helper from "../helpers/session";
 const linksData = [
   {
     title: "Home",
@@ -91,6 +98,12 @@ export default {
       leftDrawerOpen: false,
       essentialLinks: linksData,
     };
+  },
+  methods: {
+    loggout() {
+      helper.loggout();
+      this.$router.push({ name: "login" });
+    },
   },
 };
 </script>

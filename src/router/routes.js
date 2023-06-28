@@ -6,9 +6,29 @@ import PrestacaoContasMes from "../pages/Relatorios/components/PrestacaoContasMe
 const routes = [
   {
     path: "/",
+    component: () => import("layouts/AuthLayout.vue"),
+    children: [
+      {
+        path: "/login",
+        name: "login",
+        component: () => import("pages/Login/Index.vue"),
+      },
+      {
+        path: "/reset",
+        name: "reset",
+        component: () => import("pages/Login/Reset.vue"),
+      },
+    ],
+  },
+  {
+    path: "/",
     component: () => import("layouts/MainLayout.vue"),
     children: [
-      { path: "/home", component: () => import("pages/Index.vue") },
+      {
+        path: "/home",
+        name: "home",
+        component: () => import("pages/Index.vue"),
+      },
       {
         path: "/condominos",
         name: "condominos",
