@@ -30,6 +30,7 @@ export default {
     object.senha = MD5(object.senha).toString();
     object.new_senha = MD5(object.new_senha).toString();
     object.ativo = 1;
+    object.reset = 0;
 
     var data = JSON.stringify({
       table: table,
