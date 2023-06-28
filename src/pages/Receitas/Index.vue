@@ -27,6 +27,7 @@
       @edit="editReceita"
       @delete="openModal"
       @recibo="openRecibo"
+      @recorrencia="addRecorrencia"
     />
     <DeleteReceitaModal
       :data="showModal.delete"
@@ -113,6 +114,9 @@ export default {
     },
     addReceita() {
       this.$router.push({ name: "receita" });
+    },
+    addRecorrencia() {
+      this.$router.push({ name: "recorrencia" });
     },
     editReceita(receita) {
       this.$router.push({

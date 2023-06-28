@@ -7,6 +7,7 @@
       row-key="id"
       :filter="filter"
       :loading="loading"
+      class="my-sticky-column-table"
     >
       <template v-slot:top>
         <q-input
@@ -30,7 +31,22 @@
           :disable="loading"
           icon="add"
           @click="add"
+          class="q-mr-sm"
         />
+        <q-btn
+          color="primary"
+          label="Gerar recorrência"
+          :disable="loading"
+          icon="add"
+          @click="recorrencia"
+        />
+      </template>
+      <template v-slot:body-cell-pago="props">
+        <td>
+          <q-chip outline :color="props.row.pago ? 'positive' : 'negative'">
+            {{ props.row.pago ? "PAGO" : "EM ABERTO" }}
+          </q-chip>
+        </td>
       </template>
       <template v-slot:body-cell-data_pagamento="props">
         <td>
@@ -45,6 +61,7 @@
             flat
             round
             @click="recibo(props.row)"
+            v-if="props.row.pago"
           />
           <q-btn
             color="primary"
@@ -80,11 +97,16 @@ export default {
       filter: "",
       loading: false,
       columns: [
-        { name: "id", label: "#", field: "id", align: "left", sortable: true },
         {
           name: "condomino",
           label: "Condômino",
           field: "condomino",
+          align: "left",
+        },
+        {
+          name: "endereco",
+          label: "Unidade",
+          field: "endereco",
           align: "left",
         },
         {
@@ -115,11 +137,13 @@ export default {
           align: "left",
           sortable: true,
         },
+
         {
-          name: "endereco",
-          label: "Unidade",
-          field: "endereco",
+          name: "pago",
+          label: "Situação",
+          field: "pago",
           align: "left",
+          sortable: true,
         },
         {
           name: "data_pagamento",
@@ -148,6 +172,28 @@ export default {
     dateFormat(date) {
       return formaters.date(date);
     },
+    recorrencia() {
+      this.$emit("recorrencia");
+    },
   },
 };
 </script>
+<style lang="sass">
+.my-sticky-column-table
+  /* specifying max-width so the example can
+    highlight the sticky column on any browser window */
+
+
+  thead tr:first-child th:first-child
+    /* bg color is important for th; just specify one */
+    background-color: #ddd
+
+  td:first-child
+    background-color: #ddd
+
+  th:first-child,
+  td:first-child
+    position: sticky
+    left: 0
+    z-index: 1
+</style>

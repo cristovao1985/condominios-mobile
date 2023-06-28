@@ -27,7 +27,7 @@
         R${{ data.totalD }}
       </q-card>
       <q-card class="col q-ma-sm q-pa-sm text-center">
-        <q-btn flat color="positive" label="Despesas" to="/receitas" />
+        <q-btn flat color="positive" label="Receitas" to="/receitas" />
         <br />
         R${{ data.totalR }}
       </q-card>

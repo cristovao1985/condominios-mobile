@@ -17,6 +17,14 @@
         label="Ativo?"
         :true-value="1"
         :false-value="0"
+        :value="object.ativo"
+      />
+      <q-checkbox
+        v-model="object.proprietario"
+        label="Proprietário?"
+        :true-value="1"
+        :false-value="0"
+        :value="object.proprietario"
       />
 
       <div class="q-mt-md">
@@ -54,6 +62,7 @@ export default {
         email: "",
         ativo: 1,
         endereco: "",
+        proprietario: 0,
       },
       tableName: "condominos",
       edit: false,

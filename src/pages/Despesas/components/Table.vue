@@ -7,6 +7,7 @@
       row-key="id"
       :filter="filter"
       :loading="loading"
+      class="my-sticky-column-table"
     >
       <template v-slot:top>
         <q-input
@@ -88,7 +89,6 @@ export default {
       filter: "",
       loading: false,
       columns: [
-        { name: "id", label: "#", field: "id", align: "left", sortable: true },
         {
           name: "beneficiario",
           label: "Beneficiário",
@@ -160,3 +160,22 @@ export default {
   },
 };
 </script>
+<style lang="sass">
+.my-sticky-column-table
+  /* specifying max-width so the example can
+    highlight the sticky column on any browser window */
+
+
+  thead tr:first-child th:first-child
+    /* bg color is important for th; just specify one */
+    background-color: #ddd
+
+  td:first-child
+    background-color: #ddd
+
+  th:first-child,
+  td:first-child
+    position: sticky
+    left: 0
+    z-index: 1
+</style>

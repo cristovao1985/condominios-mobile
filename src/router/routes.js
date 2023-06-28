@@ -37,6 +37,11 @@ const routes = [
         component: () => import("pages/Receitas/Index.vue"),
       },
       {
+        path: "/recorrencia",
+        name: "recorrencia",
+        component: () => import("pages/Receitas/Recorrencia.vue"),
+      },
+      {
         path: "/receita/:id?",
         name: "receita",
         props: true,
