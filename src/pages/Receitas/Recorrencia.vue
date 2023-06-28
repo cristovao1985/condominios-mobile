@@ -153,7 +153,6 @@ export default {
     },
     async saveReceita() {
       this.$refs.form.validate().then(() => {
-        debugger;
         if (this.edit) {
           this.update();
           return;
