@@ -31,6 +31,7 @@
           :disable="loading"
           icon="add"
           @click="add"
+          v-if="access.criar"
         />
       </template>
       <template v-slot:body-cell-actions="props">
@@ -41,6 +42,7 @@
             flat
             round
             @click="edit(props.row)"
+            v-if="access.editar"
           />
           <q-btn
             color="negative"
@@ -48,6 +50,7 @@
             flat
             round
             @click="remove(props.row)"
+            v-if="access.deletar"
           />
         </q-td>
       </template>
@@ -55,13 +58,15 @@
   </div>
 </template>
 <script>
-import ref from "vue";
 export default {
   name: "TableVeiculos",
   props: {
     data: {
       type: Array,
       required: true,
+    },
+    access: {
+      type: Object,
     },
   },
   data() {

@@ -5,6 +5,8 @@ const headersJson = {
   Authorization: "Basic MTEyMzQ1Njc4OTA6MDk4NzY1NDMyMTE=",
   "Content-Type": "application/json",
 };
+import helpers from "../../helpers/session";
+const user = helpers.getCurrentUser();
 
 export default {
   get: async (table, order = "id") => {
@@ -52,6 +54,7 @@ export default {
     return response.data;
   },
   update: async (table, object) => {
+    object.usuario = user.nome;
     var data = JSON.stringify({
       table: table,
       object: object,

@@ -8,6 +8,7 @@
       @add="addVeiculo"
       @edit="editVeiculo"
       @delete="openModal"
+      :access="acessos"
     />
     <DeleteVeiculoModal
       :data="showModal.delete"
@@ -25,12 +26,13 @@ import TableVeiculos from "../Veiculos/components/Table.vue";
 import DeleteVeiculoModal from "./components/DeleteVeiculoModal.vue";
 import ShowToastMixin from "../../mixins/notify";
 import TableSkeleton from "src/components/TableSkeleton.vue";
+import acessosApi from "../../api/acessos/acessos";
 export default {
   name: "IndexPage",
   components: {
     TableVeiculos,
     DeleteVeiculoModal,
-    TableSkeleton
+    TableSkeleton,
   },
   data() {
     return {
@@ -41,9 +43,11 @@ export default {
         delete: false,
       },
       veiculo: {},
+      acessos: null,
     };
   },
   created() {
+    this.getAcessos();
     this.getAll();
   },
   mixins: [ShowToastMixin],
@@ -75,7 +79,10 @@ export default {
       await baseApi
         .remove("veiculos", veiculo)
         .then(() => {
-          ShowToastMixin.showToast(`${veiculo.descricao} deletado com sucesso!`, "positive");
+          ShowToastMixin.showToast(
+            `${veiculo.descricao} deletado com sucesso!`,
+            "positive"
+          );
         })
         .catch((error) => {
           ShowToastMixin.showToast(error.message, "negative");
@@ -90,6 +97,16 @@ export default {
     },
     closeModal(modal) {
       this.showModal[modal] = false;
+    },
+    async getAcessos() {
+      await acessosApi
+        .get(this.tableName)
+        .then((result) => {
+          this.acessos = result.data[0];
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };

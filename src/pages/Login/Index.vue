@@ -55,7 +55,7 @@ export default {
     async loginAccount() {
       await autenticacaoApi
         .get("usuarios", this.login.user.trim(), this.login.password.trim())
-        .then((result) => {
+        .then(async (result) => {
           const user = result.data[0];
 
           if (!user) {

@@ -8,6 +8,7 @@
       @add="addCondomino"
       @edit="editCondomino"
       @delete="openModal"
+      :access="acessos"
     />
     <DeleteCondominoModal
       :data="showModal.delete"
@@ -24,6 +25,7 @@ import TableCondominos from "../Condominos/components/Table.vue";
 import DeleteCondominoModal from "./components/DeleteCondominoModal.vue";
 import ShowToastMixin from "../../mixins/notify";
 import TableSkeleton from "src/components/TableSkeleton.vue";
+import acessosApi from "../../api/acessos/acessos";
 export default {
   name: "IndexPage",
   components: {
@@ -41,9 +43,11 @@ export default {
         delete: false,
       },
       condomino: {},
+      acessos: null,
     };
   },
   created() {
+    this.getAcessos();
     this.getAll();
   },
   mixins: [ShowToastMixin],
@@ -95,6 +99,16 @@ export default {
     },
     closeModal(modal) {
       this.showModal[modal] = false;
+    },
+    async getAcessos() {
+      await acessosApi
+        .get(this.tableName)
+        .then((result) => {
+          this.acessos = result.data[0];
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };

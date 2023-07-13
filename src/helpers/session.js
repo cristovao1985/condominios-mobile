@@ -5,4 +5,9 @@ export default {
   loggout: () => {
     localStorage.clear();
   },
+  getCurrentUser: () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    return user;
+  },
 };

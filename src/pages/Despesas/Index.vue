@@ -27,6 +27,7 @@
       @edit="editDespesa"
       @delete="openModal"
       @recibo="openRecibo"
+      :access="acessos"
     />
     <DeleteDespesaModal
       :data="showModal.delete"
@@ -44,7 +45,7 @@ import TableDespesas from "../Despesas/components/Table.vue";
 import DeleteDespesaModal from "./components/DeleteDespesaModal.vue";
 import ShowToastMixin from "../../mixins/notify";
 import TableSkeleton from "src/components/TableSkeleton.vue";
-
+import acessosApi from "../../api/acessos/acessos";
 export default {
   name: "IndexPage",
   components: {
@@ -83,9 +84,11 @@ export default {
           .toLocaleString("pt-br", { month: "long" })
           .toUpperCase(),
       },
+      acessos: null,
     };
   },
   created() {
+    this.getAcessos();
     this.getAll();
   },
   mixins: [ShowToastMixin],
@@ -152,6 +155,16 @@ export default {
       });
 
       window.open(route.href, "_blank");
+    },
+    async getAcessos() {
+      await acessosApi
+        .get(this.tableName)
+        .then((result) => {
+          this.acessos = result.data[0];
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };

@@ -58,7 +58,6 @@ export default {
   },
   mounted() {
     this.recibo = JSON.parse(this.$route.query.data);
-    console.log(this.recibo);
     this.printPage();
   },
   methods: {

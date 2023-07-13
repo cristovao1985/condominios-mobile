@@ -32,6 +32,7 @@
           icon="add"
           @click="add"
           class="q-mr-sm"
+          v-if="access.criar"
         />
         <q-btn
           color="primary"
@@ -39,6 +40,7 @@
           :disable="loading"
           icon="add"
           @click="recorrencia"
+          v-if="access.criar"
         />
       </template>
       <template v-slot:body-cell-pago="props">
@@ -69,6 +71,7 @@
             flat
             round
             @click="edit(props.row)"
+            v-if="access.editar"
           />
           <q-btn
             color="negative"
@@ -76,6 +79,7 @@
             flat
             round
             @click="remove(props.row)"
+            v-if="access.deletar"
           />
         </q-td>
       </template>
@@ -90,6 +94,9 @@ export default {
     data: {
       type: Array,
       required: true,
+    },
+    access: {
+      type: Object,
     },
   },
   data() {

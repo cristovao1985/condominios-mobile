@@ -162,7 +162,6 @@ export default {
       despesasApi
         .get("despesas", "id", this.filter.ano, this.filter.mes)
         .then((result) => {
-          console.log(result);
           this.despesas = result.data;
         })
         .catch((error) => {
@@ -173,7 +172,6 @@ export default {
       receitasApi
         .get("receitas", "id", this.filter.ano, this.filter.mes)
         .then((result) => {
-          console.log(result);
           this.receitas = result.data;
         })
         .catch((error) => {

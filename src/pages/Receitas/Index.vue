@@ -28,6 +28,7 @@
       @delete="openModal"
       @recibo="openRecibo"
       @recorrencia="addRecorrencia"
+      :access="acessos"
     />
     <DeleteReceitaModal
       :data="showModal.delete"
@@ -45,6 +46,7 @@ import TableReceitas from "../Receitas/components/Table.vue";
 import DeleteReceitaModal from "./components/DeleteReceitaModal.vue";
 import ShowToastMixin from "../../mixins/notify";
 import TableSkeleton from "src/components/TableSkeleton.vue";
+import acessosApi from "../../api/acessos/acessos";
 export default {
   name: "IndexPage",
   components: {
@@ -83,9 +85,11 @@ export default {
           .toLocaleString("pt-br", { month: "long" })
           .toUpperCase(),
       },
+      acessos: null,
     };
   },
   created() {
+    this.getAcessos();
     this.getAll();
   },
   mixins: [ShowToastMixin],
@@ -155,6 +159,16 @@ export default {
       });
       console.log(route);
       window.open(route.href, "_blank");
+    },
+    async getAcessos() {
+      await acessosApi
+        .get(this.tableName)
+        .then((result) => {
+          this.acessos = result.data[0];
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
