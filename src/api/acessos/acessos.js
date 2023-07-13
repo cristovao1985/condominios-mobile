@@ -1,6 +1,7 @@
 import axios from "axios";
-const baseUrl = "http://localhost:9000/.netlify/functions/api/acessos";
-//const baseUrl = "http://localhost:9000/.netlify/functions/api/autenticacao";
+//const baseUrl = "http://localhost:9000/.netlify/functions/api/acessos";
+const baseUrl =
+  "https://netflify-demo.netlify.app/.netlify/functions/api/acessos";
 const headersJson = {
   Authorization: "Basic MTEyMzQ1Njc4OTA6MDk4NzY1NDMyMTE=",
   "Content-Type": "application/json",
