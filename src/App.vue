@@ -4,11 +4,11 @@
 
 <script>
 import { defineComponent } from "vue";
-import router from "./router";
+//import router from "./router";
 export default defineComponent({
   name: "App",
-  created() {
-    this.$router.push({ name: "home" });
-  },
+  // created() {
+  //   this.$router.push({ name: "home" });
+  // },
 });
 </script>
