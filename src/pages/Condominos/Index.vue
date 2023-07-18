@@ -43,7 +43,7 @@ export default {
         delete: false,
       },
       condomino: {},
-      acessos: null,
+      acessos: { criar: 0, ler: 0, editar: 0, deletar: 0, pagina: "" },
     };
   },
   created() {

@@ -1,14 +1,17 @@
 <template>
-  <router-view />
+  <div>
+    <div class="text-center">
+      <q-btn to="home" class="primary"> Acessar painel</q-btn>
+    </div>
+    <router-view />
+  </div>
 </template>
 
 <script>
 import { defineComponent } from "vue";
-//import router from "./router";
+
 export default defineComponent({
   name: "App",
-  // created() {
-  //   this.$router.push({ name: "home" });
-  // },
+  mounted() {},
 });
 </script>
