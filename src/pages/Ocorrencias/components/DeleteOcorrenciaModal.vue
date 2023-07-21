@@ -7,7 +7,7 @@
         </q-card-section>
         <q-card-section>
           <div class="text-h6 text-negative">
-            Deseja deletar {{ ocorrencia.descricao }}?
+            Deseja deletar {{ ocorrencia.titulo }}?
           </div>
         </q-card-section>
         <q-card-actions align="right">
