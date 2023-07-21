@@ -86,6 +86,12 @@ const linksData = [
     icon: "request_page",
     link: "#/relatorios",
   },
+  {
+    title: "Ocorrências",
+    caption: "Livro de ocorrências",
+    icon: "warning_amber",
+    link: "#/ocorrencias",
+  },
 ];
 
 export default {

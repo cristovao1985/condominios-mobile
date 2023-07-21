@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md">
     <q-table
-      title="Receitas"
+      title="Ocorrências"
       :rows="data"
       :columns="columns"
       row-key="id"
@@ -31,41 +31,17 @@
           :disable="loading"
           icon="add"
           @click="add"
-          class="q-mr-sm q-mt-sm"
-          v-if="access.criar"
-        />
-        <q-btn
-          color="primary"
-          label="Gerar recorrência"
-          :disable="loading"
-          icon="add"
-          @click="recorrencia"
           v-if="access.criar"
           class="q-mt-sm"
         />
       </template>
-      <template v-slot:body-cell-pago="props">
+      <template v-slot:body-cell-data="props">
         <td>
-          <q-chip outline :color="props.row.pago ? 'positive' : 'negative'">
-            {{ props.row.pago ? "PAGO" : "EM ABERTO" }}
-          </q-chip>
-        </td>
-      </template>
-      <template v-slot:body-cell-data_pagamento="props">
-        <td>
-          {{ dateFormat(props.row.data_pagamento) }}
+          {{ dateFormat(props.row.data) }}
         </td>
       </template>
       <template v-slot:body-cell-actions="props">
         <q-td :props="props">
-          <q-btn
-            color="positive"
-            icon="receipt"
-            flat
-            round
-            @click="recibo(props.row)"
-            v-if="props.row.pago"
-          />
           <q-btn
             color="primary"
             icon="edit"
@@ -90,7 +66,7 @@
 <script>
 import formaters from "../../../helpers/formaters";
 export default {
-  name: "TableCondominos",
+  name: "TableOcorrencias",
   props: {
     data: {
       type: Array,
@@ -106,59 +82,23 @@ export default {
       loading: false,
       columns: [
         {
-          name: "condomino",
-          label: "Condômino",
-          field: "condomino",
-          align: "left",
-        },
-        {
-          name: "endereco",
-          label: "Unidade",
-          field: "endereco",
-          align: "left",
-        },
-        {
-          name: "descricao",
-          label: "Descrição",
-          field: "descricao",
+          name: "titulo",
+          label: "Título",
+          field: "titulo",
           align: "left",
           sortable: true,
         },
         {
-          name: "categoria",
-          label: "Categoria",
-          field: "categoria",
+          name: "data",
+          label: "Data da ocorrência",
+          field: "data",
           align: "left",
-          sortable: true,
         },
         {
-          name: "mes",
-          label: "Mês referência",
-          field: "mes",
+          name: "usuario",
+          label: "Relator",
+          field: "usuario",
           align: "left",
-          sortable: true,
-        },
-        {
-          name: "valor",
-          label: "Valor R$",
-          field: "valor",
-          align: "left",
-          sortable: true,
-        },
-
-        {
-          name: "pago",
-          label: "Situação",
-          field: "pago",
-          align: "left",
-          sortable: true,
-        },
-        {
-          name: "data_pagamento",
-          label: "Data pagamento",
-          field: "data_pagamento",
-          align: "left",
-          sortable: true,
         },
         { name: "actions", label: "Ações", field: "actions", align: "center" },
       ],
@@ -168,20 +108,14 @@ export default {
     add() {
       this.$emit("add");
     },
-    edit(receita) {
-      this.$emit("edit", receita);
+    edit(ocorrencia) {
+      this.$emit("edit", ocorrencia);
     },
-    remove(receita) {
-      this.$emit("delete", { modal: "delete", receita });
-    },
-    recibo(receita) {
-      this.$emit("recibo", receita);
+    remove(ocorrencia) {
+      this.$emit("delete", { modal: "delete", ocorrencia });
     },
     dateFormat(date) {
       return formaters.date(date);
-    },
-    recorrencia() {
-      this.$emit("recorrencia");
     },
   },
 };

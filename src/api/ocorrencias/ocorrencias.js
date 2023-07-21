@@ -5,11 +5,9 @@ const headersJson = {
   Authorization: "Basic MTEyMzQ1Njc4OTA6MDk4NzY1NDMyMTE=",
   "Content-Type": "application/json",
 };
-import helpers from "../../helpers/session";
-const user = helpers.getCurrentUser();
 
 export default {
-  get: async (table, order = "id") => {
+  get: async (table, order) => {
     var data = JSON.stringify({
       table,
       order,
@@ -24,22 +22,7 @@ export default {
 
     return response.data;
   },
-  getById: async (table, id) => {
-    var data = JSON.stringify({
-      table,
-    });
-
-    const response = await axios({
-      method: "POST",
-      url: `${baseUrl}/${id}`,
-      data: data,
-      headers: headersJson,
-    });
-
-    return response.data;
-  },
   insert: async (table, object) => {
-    object.usuario = user.nome;
     var data = JSON.stringify({
       table: table,
       object: object,
@@ -55,7 +38,6 @@ export default {
     return response.data;
   },
   update: async (table, object) => {
-    object.usuario = user.nome;
     var data = JSON.stringify({
       table: table,
       object: object,

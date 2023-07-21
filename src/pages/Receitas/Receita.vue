@@ -98,7 +98,13 @@ export default {
         "NOVEMBRO",
         "DEZEMBRO",
       ],
-      categorias: ["TAXA DE CONDOMÍNIO", "MULTAS", "OUTROS"],
+      categorias: [
+        "TAXA DE CONDOMÍNIO",
+        "MULTAS",
+        "TAXAS",
+        "OUTROS",
+        "ACORDOS",
+      ],
     };
   },
   computed: {

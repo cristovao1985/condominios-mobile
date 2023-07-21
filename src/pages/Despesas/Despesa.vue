@@ -97,6 +97,12 @@ export default {
         "PRESTADORES DE SERVIÇOS",
         "MATERIAL DE ESCRITÓRIO",
         "TRANSPORTE",
+        "INSUMOS",
+        "ALIMENTAÇÃO",
+        "REFEIÇÃO",
+        "MULTAS",
+        "TAXAS",
+        "ACORDOS",
       ],
     };
   },

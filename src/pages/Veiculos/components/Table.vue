@@ -32,6 +32,7 @@
           icon="add"
           @click="add"
           v-if="access.criar"
+          class="q-mt-sm"
         />
       </template>
       <template v-slot:body-cell-actions="props">

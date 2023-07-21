@@ -4,6 +4,7 @@ import CondominoPage from "../pages/Condominos/Condomino.vue";
 import PrestacaoContasMes from "../pages/Relatorios/components/PrestacaoContasMes";
 
 const routes = [
+  { path: "/", redirect: { path: "/home" } },
   {
     path: "/",
     component: () => import("layouts/AuthLayout.vue"),
@@ -85,32 +86,47 @@ const routes = [
         name: "relatorios",
         component: () => import("pages/Relatorios/Index.vue"),
       },
+      {
+        path: "/ocorrencias",
+        name: "ocorrencias",
+        component: () => import("pages/Ocorrencias/Index.vue"),
+      },
+      {
+        path: "/ocorrencia/:id?",
+        name: "ocorrencia",
+        props: true,
+        component: () => import("pages/Ocorrencias/Ocorrencia.vue"),
+      },
     ],
   },
-
+  {
+    path: "/",
+    children: [
+      {
+        path: "/recibo-receita",
+        name: "recibo-receita",
+        props: true,
+        component: ReciboReceita,
+      },
+      {
+        path: "/recibo-despesa",
+        name: "recibo-despesa",
+        props: true,
+        component: ReciboDespesa,
+      },
+      {
+        path: "/prestacao-contas-mes",
+        name: "prestacao-contas-mes",
+        props: true,
+        component: PrestacaoContasMes,
+      },
+    ],
+  },
   // Always leave this as last one,
   // but you can also remove it
   {
     path: "/:catchAll(.*)*",
     component: () => import("pages/Error404.vue"),
-  },
-  {
-    path: "/recibo-receita",
-    name: "recibo-receita",
-    props: true,
-    component: ReciboReceita,
-  },
-  {
-    path: "/recibo-despesa",
-    name: "recibo-despesa",
-    props: true,
-    component: ReciboDespesa,
-  },
-  {
-    path: "/prestacao-contas-mes",
-    name: "prestacao-contas-mes",
-    props: true,
-    component: PrestacaoContasMes,
   },
 ];
 

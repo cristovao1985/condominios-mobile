@@ -85,7 +85,7 @@ export default {
           .toLocaleString("pt-br", { month: "long" })
           .toUpperCase(),
       },
-      acessos: null,
+      acessos: { criar: 0, editar: 0, ler: 1, deletar: 0 },
     };
   },
   created() {
