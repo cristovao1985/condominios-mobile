@@ -2,6 +2,7 @@ import ReciboReceita from "../pages/Receitas/components/Recibo.vue";
 import ReciboDespesa from "../pages/Despesas/components/Recibo.vue";
 import CondominoPage from "../pages/Condominos/Condomino.vue";
 import PrestacaoContasMes from "../pages/Relatorios/components/PrestacaoContasMes";
+import OrdemManutencao from "../pages/Manutencoes/components/OrdemManutencao.vue";
 
 const routes = [
   { path: "/", redirect: { path: "/home" } },
@@ -97,6 +98,17 @@ const routes = [
         props: true,
         component: () => import("pages/Ocorrencias/Ocorrencia.vue"),
       },
+      {
+        path: "/manutencoes",
+        name: "manutencoes",
+        component: () => import("pages/Manutencoes/Index.vue"),
+      },
+      {
+        path: "/manutencao/:id?",
+        name: "manutencao",
+        props: true,
+        component: () => import("pages/Manutencoes/Manutencao.vue"),
+      },
     ],
   },
   {
@@ -119,6 +131,12 @@ const routes = [
         name: "prestacao-contas-mes",
         props: true,
         component: PrestacaoContasMes,
+      },
+      {
+        path: "/ordem-manutencao",
+        name: "ordem-manutencao",
+        props: true,
+        component: OrdemManutencao,
       },
     ],
   },

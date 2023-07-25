@@ -92,6 +92,12 @@ const linksData = [
     icon: "warning_amber",
     link: "#/ocorrencias",
   },
+  {
+    title: "Manutenções",
+    caption: "Ordem de serviços",
+    icon: "handyman",
+    link: "#/manutencoes",
+  },
 ];
 
 export default {
