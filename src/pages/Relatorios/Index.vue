@@ -81,7 +81,7 @@
     </div>
     <div class="q-mt-md">
       <q-btn
-        label="Gerar relatório"
+        label="Gerar prestação de contas"
         class="full-width"
         color="primary"
         v-if="showPrintButton"

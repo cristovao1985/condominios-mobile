@@ -99,11 +99,11 @@ export default {
         "DEZEMBRO",
       ],
       categorias: [
-        "TAXA DE CONDOMÍNIO",
+        "ACORDOS",
         "MULTAS",
+        "TAXA DE CONDOMÍNIO",
         "TAXAS",
         "OUTROS",
-        "ACORDOS",
       ],
     };
   },

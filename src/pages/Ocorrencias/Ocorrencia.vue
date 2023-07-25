@@ -7,6 +7,7 @@
         label="Título"
         :value="object.titulo"
         required
+        autofocus
       />
       <q-editor v-model="object.descricao" label="Descrição" required />
       <q-input

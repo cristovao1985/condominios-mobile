@@ -71,9 +71,12 @@ export default {
               // enviar usuário para reset de senha
               this.$router.push({ name: "reset" });
             } else {
+              var today = new Date();
+              today.setHours(today.getHours() + 4);
               helpers.setCurrentUser({
                 nome: user.nome,
                 usuario: user.usuario,
+                expires_on: new Date(today).getTime(),
               });
               this.$router.push({ name: "home" });
             }

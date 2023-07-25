@@ -58,13 +58,13 @@ const linksData = [
   },
   {
     title: "Condominos",
-    caption: "Controle de condominos",
+    caption: "Controle de moradores",
     icon: "people",
     link: "#/condominos",
   },
   {
     title: "Veículos",
-    caption: "Controle de veiculos",
+    caption: "Controle de veículos",
     icon: "drive_eta",
     link: "#/veiculos",
   },

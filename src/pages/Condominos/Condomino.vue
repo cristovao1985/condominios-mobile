@@ -7,11 +7,12 @@
       <q-input
         v-model="object.telefone"
         label="Telefone"
-        mask="(##)####-####"
+        mask="(##)#####-####"
         required
       />
       <q-input v-model="object.email" label="E-mail" type="email" />
       <q-input v-model="object.endereco" label="Unidade" required />
+      <q-input v-model="object.nascimento" label="Nascimento" type="date" />
       <q-checkbox
         v-model="object.ativo"
         label="Ativo?"
@@ -63,6 +64,7 @@ export default {
         ativo: 1,
         endereco: "",
         proprietario: 0,
+        nascimento: "",
       },
       tableName: "condominos",
       edit: false,
@@ -73,10 +75,11 @@ export default {
       return this.edit ? "Atualizar registro" : "Inserir registro";
     },
   },
-  created() {
+  async created() {
     if (this.$route.params.id) {
       this.edit = true;
-      this.getCondomino();
+      await this.getCondomino();
+      this.object.nascimento = this.object.nascimento.substring(0, 10);
     } else {
       this.edit = false;
       this.object = {

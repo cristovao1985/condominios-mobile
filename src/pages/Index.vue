@@ -49,11 +49,17 @@
         {{ data.totalV }}
       </q-card>
     </div>
+    <div v-if="ocorrencia">
+      <strong>Última ocorrência</strong><br />
+      {{ ocorrencia.titulo }} - {{ dateFormat(ocorrencia.data) }}
+    </div>
   </q-page>
 </template>
 
 <script>
 import dashboardApi from "../api/dashboard/dashboard.api";
+import baseApi from "src/api/base/base.api";
+import formaters from "../helpers/formaters";
 export default {
   name: "Home",
   data() {
@@ -80,10 +86,12 @@ export default {
           .toLocaleString("pt-br", { month: "long" })
           .toUpperCase(),
       },
+      ocorrencia: {},
     };
   },
   created() {
     this.getDashboardData();
+    this.getOcorrencia();
   },
   watch: {
     "filter.mes"() {
@@ -104,6 +112,21 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+    },
+    getOcorrencia() {
+      baseApi
+        .get("ocorrencias", "id")
+        .then((result) => {
+          if (result.success) {
+            this.ocorrencia = result.data[result.data.length - 1];
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    dateFormat(date) {
+      return formaters.date(date);
     },
   },
 };
