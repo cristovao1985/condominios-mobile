@@ -108,7 +108,7 @@ const linksData = [
   },
   {
     title: "Manutenções",
-    caption: "Ordem de serviços",
+    caption: "Serviços e manutenções",
     icon: "handyman",
     link: "#/manutencoes",
   },

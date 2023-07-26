@@ -12,9 +12,9 @@
         CNPJ 19.767.835/0001-08
       </p>
       <h6>PRESTAÇÃO DE CONTAS {{ recibo.mes }}/{{ recibo.ano }}</h6>
-      <TableDespesas :data="recibo.despesas" />
-      <br />
       <TableReceitas :data="recibo.receitas" />
+      <br />
+      <TableDespesas :data="recibo.despesas" />
     </div>
     <div class="row justify-between bg-grey-3 q-pa-sm">
       <div>
