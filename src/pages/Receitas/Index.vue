@@ -77,6 +77,7 @@ export default {
         "OUTUBRO",
         "NOVEMBRO",
         "DEZEMBRO",
+        "TODOS",
       ],
       anos: [2021, 2022, 2023, 2024, 2025, 2026],
       filter: {
