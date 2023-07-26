@@ -1,6 +1,5 @@
 <template>
   <q-page class="q-ma-md">
-    <h6>Controle de manutenções</h6>
     <TableSkeleton v-if="loading" />
     <TableManutencoes
       :data="manutencoes"

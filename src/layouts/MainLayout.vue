@@ -9,8 +9,22 @@
           icon="menu"
           aria-label="Menu"
           @click="leftDrawerOpen = !leftDrawerOpen"
+          v-if="currentRoute() === 'Home'"
         />
-        <q-toolbar-title> Morada do Sol </q-toolbar-title>
+        <q-btn
+          v-else
+          flat
+          dense
+          round
+          icon="arrow_back"
+          aria-label="Menu"
+          @click="$router.go(-1)"
+        />
+        <q-toolbar-title>
+          {{
+            `${currentRoute() === "Home" ? "Morada do Sol" : currentRoute()}`
+          }}
+        </q-toolbar-title>
         <div>v.BETA</div>
       </q-toolbar>
     </q-header>
@@ -88,7 +102,7 @@ const linksData = [
   },
   {
     title: "Ocorrências",
-    caption: "Livro de ocorrências",
+    caption: "Livro de ocorrências e notícias",
     icon: "warning_amber",
     link: "#/ocorrencias",
   },
@@ -115,6 +129,9 @@ export default {
     loggout() {
       helper.loggout();
       this.$router.push({ name: "login" });
+    },
+    currentRoute() {
+      return this.$router.currentRoute.value.meta.title;
     },
   },
 };

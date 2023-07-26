@@ -65,7 +65,7 @@ export default {
       object: {
         descricao: "Boleto",
         valor: 0,
-        pago: true,
+        pago: 0,
         data_pagamento: "",
         mes: "",
         beneficiario: "",

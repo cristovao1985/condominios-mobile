@@ -1,6 +1,5 @@
 <template>
   <q-page class="q-ma-md">
-    <h6>Livro de ocorrencias</h6>
     <TableSkeleton v-if="loading" />
     <TableOcorrencias
       :data="ocorrencias"

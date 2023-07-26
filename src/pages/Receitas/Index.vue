@@ -1,6 +1,5 @@
 <template>
   <q-page class="q-ma-md">
-    <h6>Controle de receitas</h6>
     <div class="row">
       <div class="col q-ma-sm">
         <q-select

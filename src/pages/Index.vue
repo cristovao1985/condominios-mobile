@@ -62,8 +62,19 @@
       </q-card>
     </div>
     <div v-if="ocorrencia">
-      <strong>Última ocorrência</strong><br />
-      {{ ocorrencia.titulo }} - {{ dateFormat(ocorrencia.data) }}
+      <q-expansion-item
+        class="red"
+        expand-separator
+        icon="warning_amber"
+        :label="ocorrencia.titulo"
+        :caption="`${ocorrencia.usuario} - ${dateFormat(ocorrencia.data)}`"
+      >
+        <q-card>
+          <q-card-section>
+            <div v-html="ocorrencia.descricao"></div>
+          </q-card-section>
+        </q-card>
+      </q-expansion-item>
     </div>
   </q-page>
 </template>
