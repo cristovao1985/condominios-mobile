@@ -25,9 +25,7 @@
       </div>
       <div>
         <strong
-          >SALDO EM {{ recibo.mes }}/{{ recibo.ano }}: R${{
-            recibo.totalR - recibo.totalD
-          }}</strong
+          >SALDO: R${{ (recibo.totalR - recibo.totalD).toFixed(2) }}</strong
         >
       </div>
     </div>

@@ -2,19 +2,33 @@
   <q-page class="q-ma-md">
     <div class="row">
       <div class="col q-ma-sm">
-        <q-select
+        <!-- <q-select
           v-model="filter.ano"
           :options="anos"
           label="Ano base"
           required
+        /> -->
+        <q-input
+          v-model="filter.data_ini"
+          label="Data inicial"
+          type="date"
+          required
+          clearable
         />
       </div>
       <div class="col q-ma-sm">
-        <q-select
+        <!-- <q-select
           v-model="filter.mes"
           :options="meses"
           label="Mês de referência"
           required
+        /> -->
+        <q-input
+          v-model="filter.data_fim"
+          label="Data fim"
+          type="date"
+          required
+          clearable
         />
       </div>
     </div>
@@ -72,11 +86,7 @@
         <strong>TOTAL DESPESAS: R${{ sumDespesas }}</strong>
       </div>
       <div>
-        <strong
-          >SALDO EM {{ filter.mes }}/{{ filter.ano }}: R${{
-            sumReceitas - sumDespesas
-          }}</strong
-        >
+        <strong>SALDO : R${{ (sumReceitas - sumDespesas).toFixed(2) }}</strong>
       </div>
     </div>
     <div class="q-mt-md">
@@ -123,17 +133,19 @@ export default {
         mes: new Date()
           .toLocaleString("pt-br", { month: "long" })
           .toUpperCase(),
+        data_ini: "",
+        data_fim: "",
       },
       receitas: [],
       despesas: [],
     };
   },
   watch: {
-    "filter.mes"() {
+    "filter.data_ini"() {
       this.getDespesas();
       this.getReceitas();
     },
-    "filter.ano"() {
+    "filter.data_fim"() {
       this.getDespesas();
       this.getReceitas();
     },
@@ -160,7 +172,7 @@ export default {
   methods: {
     async getDespesas() {
       despesasApi
-        .get("despesas", "id", this.filter.ano, this.filter.mes)
+        .getDashboard("despesas", this.filter)
         .then((result) => {
           this.despesas = result.data;
         })
@@ -170,7 +182,7 @@ export default {
     },
     async getReceitas() {
       receitasApi
-        .get("receitas", "id", this.filter.ano, this.filter.mes)
+        .getDashboard("receitas", this.filter)
         .then((result) => {
           this.receitas = result.data;
         })

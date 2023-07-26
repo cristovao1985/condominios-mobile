@@ -84,4 +84,21 @@ export default {
 
     return response.data;
   },
+  getDashboard: async (table, filter) => {
+    const { data_ini, data_fim } = filter;
+    var data = JSON.stringify({
+      table,
+      data_ini,
+      data_fim,
+    });
+
+    const response = await axios({
+      method: "POST",
+      url: `${baseUrl}/dashboard`,
+      data: data,
+      headers: headersJson,
+    });
+
+    return response.data;
+  },
 };

@@ -8,10 +8,11 @@ const headersJson = {
 };
 
 export default {
-  get: async (year, month) => {
+  get: async (filter) => {
+    const { data_ini, data_fim } = filter;
     var data = JSON.stringify({
-      year,
-      month,
+      data_ini,
+      data_fim,
     });
 
     const response = await axios({

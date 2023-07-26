@@ -3,18 +3,30 @@
     <h6>Dashboard</h6>
     <div class="row">
       <div class="col q-ma-sm">
-        <q-select
+        <!-- <q-select
           v-model="filter.ano"
           :options="anos"
           label="Ano base"
           required
+        /> -->
+        <q-input
+          v-model="filter.data_ini"
+          label="Data inicial"
+          type="date"
+          required
         />
       </div>
       <div class="col q-ma-sm">
-        <q-select
+        <!-- <q-select
           v-model="filter.mes"
           :options="meses"
           label="Mês de referência"
+          required
+        /> -->
+        <q-input
+          v-model="filter.data_fim"
+          label="Data fim"
+          type="date"
           required
         />
       </div>
@@ -34,7 +46,7 @@
       <q-card class="col q-ma-sm q-pa-sm text-center">
         <q-btn flat label="Saldo" />
         <br />
-        R${{ data.totalR - data.totalD }}
+        R${{ (data.totalR - data.totalD).toFixed(2) }}
       </q-card>
     </div>
     <div class="row">
@@ -85,6 +97,8 @@ export default {
         mes: new Date()
           .toLocaleString("pt-br", { month: "long" })
           .toUpperCase(),
+        data_ini: "",
+        data_fim: "",
       },
       ocorrencia: {},
     };
@@ -94,10 +108,10 @@ export default {
     this.getOcorrencia();
   },
   watch: {
-    "filter.mes"() {
+    "filter.data_ini"() {
       this.getDashboardData();
     },
-    "filter.ano"() {
+    "filter.data_fim"() {
       this.getDashboardData();
     },
   },
@@ -105,7 +119,7 @@ export default {
     async getDashboardData() {
       this.data = [];
       await dashboardApi
-        .get(this.filter.ano, this.filter.mes)
+        .get(this.filter)
         .then((result) => {
           this.data = result.data[0];
         })
