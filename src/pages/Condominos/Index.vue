@@ -8,6 +8,7 @@
       @edit="editCondomino"
       @delete="openModal"
       :access="acessos"
+      @export="exportCSV"
     />
     <DeleteCondominoModal
       :data="showModal.delete"
@@ -25,6 +26,7 @@ import DeleteCondominoModal from "./components/DeleteCondominoModal.vue";
 import ShowToastMixin from "../../mixins/notify";
 import TableSkeleton from "src/components/TableSkeleton.vue";
 import acessosApi from "../../api/acessos/acessos";
+import helpers from "../../helpers/csv"
 export default {
   name: "IndexPage",
   components: {
@@ -109,6 +111,9 @@ export default {
           console.log(error);
         });
     },
+    exportCSV(columns){
+      helpers.exportTable(this.condominos, columns, this.tableName)
+    }
   },
 };
 </script>

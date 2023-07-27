@@ -32,6 +32,15 @@
           icon="add"
           @click="add"
           v-if="access.criar"
+          class="q-mt-sm q-mr-sm"
+        />
+        <q-btn
+          color="positive"
+          label="Exportar"
+          :disable="loading"
+          icon="download"
+          @click="exportCSV"
+          v-if="access.criar"
           class="q-mt-sm"
         />
       </template>
@@ -126,6 +135,9 @@ export default {
     },
     remove(condomino) {
       this.$emit("delete", { modal: "delete", condomino });
+    },
+    exportCSV() {
+      this.$emit("export", this.columns);
     },
   },
 };
