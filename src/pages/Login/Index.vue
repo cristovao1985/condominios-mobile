@@ -23,31 +23,42 @@
               type="password"
             />
             <q-card-actions class="justify-between">
-              <!-- <q-btn
-                label="Criar uma conta"
-                color="secondary"
-                flat
-                to="signup"
-              /> -->
               <q-btn label="Acessar painel" type="submit" color="primary" />
+              <q-btn
+                label="Esqueci minha senha"
+                flat
+                @click="openModal('validate')"
+              />
             </q-card-actions>
           </q-form>
         </div>
       </div>
     </q-card>
+    <ValidarUsuarioModal
+      @validate="validate"
+      :data="showModal.validate"
+      @closeModal="closeModal"
+    />
   </div>
 </template>
 <script>
 import autenticacaoApi from "../../api/autenticacao/autenticacao";
 import helpers from "../../helpers/session";
 import ShowToastMixin from "../../mixins/notify";
+import ValidarUsuarioModal from "./components/ValidarUsuarioModal.vue";
 export default {
-  name: "SignUp",
+  name: "Login",
+  components: {
+    ValidarUsuarioModal,
+  },
   data() {
     return {
       login: {
         user: "",
         password: "",
+      },
+      showModal: {
+        validate: false,
       },
     };
   },
@@ -91,6 +102,29 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+    },
+    openModal(modal) {
+      this.showModal[modal] = true;
+    },
+    closeModal(modal) {
+      this.showModal[modal] = false;
+    },
+    async validate({ user, email }) {
+      await autenticacaoApi
+        .validate(user, email)
+        .then((result) => {
+          const { email, nome } = result.data[0];
+          if (result.success) {
+            autenticacaoApi
+              .sendEmail(email, nome)
+              .then((result) => {
+                ShowToastMixin.showToast(result.message, "positive");
+                this.closeModal("validate");
+              })
+              .catch((error) => console.log(error));
+          }
+        })
+        .catch((error) => console.log(error));
     },
   },
 };

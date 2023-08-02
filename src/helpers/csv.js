@@ -21,7 +21,11 @@ export default {
       )
       .join("\r\n");
 
-    const status = exportFile(`${fileName}.csv`, "\ufeff" + content, "text/csv");
+    const status = exportFile(
+      `${fileName}.csv`,
+      "\ufeff" + content,
+      "text/csv"
+    );
 
     if (status !== true) {
       $q.notify({

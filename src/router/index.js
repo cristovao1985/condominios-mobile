@@ -38,9 +38,11 @@ export default route(function (/* { store, ssrContext } */) {
   Router.beforeEach((to, from, next) => {
     var tokenStr = JSON.parse(localStorage.getItem("user"));
 
-
-
-    if (to.path === "/login" || to.path === "/reset") {
+    if (
+      to.path === "/login" ||
+      to.path === "/reset" ||
+      to.path === "/password"
+    ) {
       next();
     } else if (
       !tokenStr ||

@@ -21,6 +21,12 @@ const routes = [
         name: "reset",
         component: () => import("pages/Login/Reset.vue"),
       },
+      {
+        path: "/password",
+        name: "password",
+        props: true,
+        component: () => import("pages/AlterarSenha/Index.vue"),
+      },
     ],
   },
   {
