@@ -1,10 +1,8 @@
 import axios from "axios";
 import MD5 from "crypto-js/md5";
-const baseUrl =
-  "https://netflify-demo.netlify.app/.netlify/functions/api/autenticacao";
-//const baseUrl = "http://localhost:9000/.netlify/functions/api/autenticacao";
-const baseEmailServicesUrl =
-  "https://netflify-demo.netlify.app/.netlify/functions/api/emailservices";
+
+const baseUrl = `${process.env.VUE_APP_API_BASE_URL}/autenticacao`;
+const baseEmailServicesUrl = process.env.VUE_APP_API_EMAIL_SERVICE_URL;
 const headersJson = {
   Authorization: "Basic MTEyMzQ1Njc4OTA6MDk4NzY1NDMyMTE=",
   "Content-Type": "application/json",

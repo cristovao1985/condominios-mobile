@@ -1,7 +1,6 @@
 import axios from "axios";
-const baseUrl =
-  "https://netflify-demo.netlify.app/.netlify/functions/api/manutencoes";
-//const baseUrl = "http://localhost:9000/.netlify/functions/api/manutencoes";
+const baseUrl = `${process.env.VUE_APP_API_BASE_URL}/manutencoes`;
+
 const headersJson = {
   Authorization: "Basic MTEyMzQ1Njc4OTA6MDk4NzY1NDMyMTE=",
   "Content-Type": "application/json",
