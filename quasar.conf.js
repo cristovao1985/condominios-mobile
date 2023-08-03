@@ -47,7 +47,9 @@ module.exports = configure(function (ctx) {
       vueRouterMode: "hash", // available values: 'hash', 'history'
       env: {
         VUE_APP_API_EMAIL_SERVICE_URL:
-          "https://netflify-demo.netlify.app/.netlify/functions/api/emailservices",
+          process.env.NODE_MODULE === "production"
+            ? "https://netflify-demo.netlify.app/.netlify/functions/api/emailservices"
+            : "http://localhost:9000/.netlify/functions/api/emailservices",
         VUE_APP_API_BASE_URL:
           process.env.NODE_MODULE === "production"
             ? "https://netflify-demo.netlify.app/.netlify/functions/api"

@@ -116,7 +116,12 @@ export default {
           const { email, nome } = result.data[0];
           if (result.success) {
             autenticacaoApi
-              .sendEmail(email, nome)
+              .sendEmail(
+                email,
+                nome,
+                "resetSenha",
+                "Condomínio Morada do Sol - Alteração de senha"
+              )
               .then((result) => {
                 ShowToastMixin.showToast(result.message, "positive");
                 this.closeModal("validate");

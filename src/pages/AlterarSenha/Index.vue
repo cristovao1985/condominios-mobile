@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col q-ma-sm">
           <h6>Alterar senha do usuário</h6>
-          <q-form @submit="loginAccount">
+          <q-form @submit="changePassword">
             <q-input
               filled
               type="text"
@@ -86,7 +86,7 @@ export default {
     },
   },
   methods: {
-    async loginAccount() {
+    async changePassword() {
       this.login.senha = this.login.password;
       this.login.new_senha = this.login.password;
       this.login.usuario = this.login.user;
@@ -96,18 +96,33 @@ export default {
       delete this.login.user;
 
       await autenticacaoApi
-        .reset("usuarios", this.login)
-        .then((result) => {
+        .validate(this.login.user, this.login.email)
+        .then(async (result) => {
           if (result.success) {
-            ShowToastMixin.showToast("Senha alterada com sucesso", "positive");
-
-            this.$router.push({ name: "login" });
+            await autenticacaoApi
+              .update("usuarios", this.login)
+              .then((result) => {
+                if (result.success) {
+                  ShowToastMixin.showToast(
+                    "Senha alterada com sucesso",
+                    "positive"
+                  );
+                  autenticacaoApi.sendEmail(
+                    this.login.email,
+                    "",
+                    "senhaAlterada",
+                    "Condomínio Morada do Sol - Senha alterada"
+                  );
+                  this.$router.push({ name: "login" });
+                }
+              })
+              .catch((error) => {
+                console.log(error);
+                ShowToastMixin.showToast(error.message, "warning");
+              });
           }
         })
-        .catch((error) => {
-          console.log(error);
-          ShowToastMixin.showToast(error.message, "warning");
-        });
+        .catch((error) => console.log(error));
     },
   },
 };

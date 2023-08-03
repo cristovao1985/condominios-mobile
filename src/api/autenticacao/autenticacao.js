@@ -61,17 +61,17 @@ export default {
 
     return response.data;
   },
-  sendEmail: async (email, condomino) => {
+  sendEmail: async (email, condomino, template, assunto) => {
     var today = new Date();
-    today.setHours(today.getHours() + 4);
+    today.setHours(today.getHours() + 2);
     const expires_on = new Date(today).getTime();
 
     var data = JSON.stringify({
       msg: {
         from: "cristovaojandson@gmail.com",
         to: email,
-        subject: "Condomínio Morada do Sol - Alteração de senha",
-        template: "resetSenha",
+        subject: assunto,
+        template,
         context: {
           condomino,
           link: `https://condominios-app.netlify.app/#/password?expires=${expires_on}`,
@@ -82,6 +82,27 @@ export default {
     const response = await axios({
       method: "POST",
       url: `${baseEmailServicesUrl}/resetpassword`,
+      data: data,
+      headers: headersJson,
+    });
+
+    return response.data;
+  },
+  update: async (table, object) => {
+    object.usuario = MD5(object.usuario).toString();
+    object.senha = MD5(object.senha).toString();
+    object.new_senha = MD5(object.new_senha).toString();
+    object.ativo = 1;
+    object.reset = 0;
+
+    var data = JSON.stringify({
+      table: table,
+      object: object,
+    });
+
+    const response = await axios({
+      method: "PUT",
+      url: `${baseUrl}/update`,
       data: data,
       headers: headersJson,
     });
