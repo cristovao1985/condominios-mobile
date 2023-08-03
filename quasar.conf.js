@@ -48,11 +48,11 @@ module.exports = configure(function (ctx) {
       env: {
         VUE_APP_API_EMAIL_SERVICE_URL:
           process.env.NODE_MODULE === "production"
-            ? "https://netflify-demo.netlify.app/.netlify/functions/api/emailservices"
+            ? "https://condominio-app.onrender.com/.netlify/functions/api/emailservices"
             : "http://localhost:9000/.netlify/functions/api/emailservices",
         VUE_APP_API_BASE_URL:
           process.env.NODE_MODULE === "production"
-            ? "https://netflify-demo.netlify.app/.netlify/functions/api"
+            ? "https://condominio-app.onrender.com/.netlify/functions/api"
             : "http://localhost:9000/.netlify/functions/api",
       },
       // transpile: false,
