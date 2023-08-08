@@ -8,6 +8,7 @@
       :filter="filter"
       :loading="loading"
       class="my-sticky-column-table"
+      rows-per-page-label="Linhas por página"
     >
       <template v-slot:top>
         <q-input

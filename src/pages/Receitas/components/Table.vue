@@ -8,6 +8,8 @@
       :filter="filter"
       :loading="loading"
       class="my-sticky-column-table"
+      :pagination="pagination"
+      rows-per-page-label="Linhas por página"
     >
       <template v-slot:top>
         <q-input
@@ -162,6 +164,9 @@ export default {
         },
         { name: "actions", label: "Ações", field: "actions", align: "center" },
       ],
+      pagination: {
+        rowsPerPage: 10,
+      },
     };
   },
   methods: {

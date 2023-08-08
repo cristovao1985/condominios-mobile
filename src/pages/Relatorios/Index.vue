@@ -80,13 +80,13 @@
     </div>
     <div class="row justify-between bg-grey-3 q-pa-sm">
       <div>
-        <strong>TOTAL RECEITAS: R${{ sumReceitas }}</strong>
+        <strong>TOTAL RECEITAS: R$ {{ sumReceitas }}</strong>
       </div>
       <div>
-        <strong>TOTAL DESPESAS: R${{ sumDespesas }}</strong>
+        <strong>TOTAL DESPESAS: R$ {{ sumDespesas }}</strong>
       </div>
       <div>
-        <strong>SALDO : R${{ (sumReceitas - sumDespesas).toFixed(2) }}</strong>
+        <strong>SALDO : R$ {{ (sumReceitas - sumDespesas).toFixed(2) }}</strong>
       </div>
     </div>
     <div class="q-mt-md">
@@ -151,6 +151,7 @@ export default {
     },
   },
   created() {
+    this.setFilterDates();
     this.getDespesas();
     this.getReceitas();
   },
@@ -206,6 +207,16 @@ export default {
       });
       console.log(route);
       window.open(route.href, "_blank");
+    },
+    setFilterDates() {
+      var date = new Date(),
+        y = date.getFullYear(),
+        m = date.getMonth();
+      var firstDay = new Date(y, m, 1);
+      var lastDay = new Date(y, m + 1, 0);
+
+      this.filter.data_ini = firstDay.toISOString().split("T")[0];
+      this.filter.data_fim = lastDay.toISOString().split("T")[0];
     },
   },
 };

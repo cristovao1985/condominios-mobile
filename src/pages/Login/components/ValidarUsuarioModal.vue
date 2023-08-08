@@ -14,6 +14,7 @@
               label="Digite seu usuário"
               lazy-rules
               :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório']"
+              autofocus
             />
             <q-input
               filled
@@ -35,8 +36,6 @@
 </template>
 
 <script>
-import { ref } from "vue";
-
 export default {
   name: "DeleteDespesaModal",
   props: {

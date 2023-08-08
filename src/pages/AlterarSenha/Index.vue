@@ -4,54 +4,54 @@
       <div class="row">
         <div class="col q-ma-sm">
           <h6>Alterar senha do usuário</h6>
-          <q-form @submit="changePassword">
-            <q-input
-              filled
-              type="text"
-              v-model="login.user"
-              label="Digite seu usuário"
-              lazy-rules
-              :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório']"
-            />
-            <q-input
-              filled
-              v-model="login.email"
-              label="Digite seu email atual"
-              lazy-rules
-              :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório']"
-              type="email"
-            />
-            <q-input
-              filled
-              v-model="login.password"
-              label="Digite sua nova senha "
-              lazy-rules
-              :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório']"
-              type="password"
-            />
-            <q-input
-              filled
-              v-model="login.password2"
-              label="Confirme sua senha"
-              lazy-rules
-              :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório']"
-              type="password"
-            />
-            <q-card-actions class="justify-between">
-              <!-- <q-btn
+
+          <q-input
+            filled
+            type="text"
+            v-model="login.user"
+            label="Digite seu usuário"
+            lazy-rules
+            :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório']"
+          />
+          <q-input
+            filled
+            v-model="login.email"
+            label="Digite seu email atual"
+            lazy-rules
+            :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório']"
+            type="email"
+          />
+          <q-input
+            filled
+            v-model="login.password"
+            label="Digite sua nova senha "
+            lazy-rules
+            :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório']"
+            type="password"
+          />
+          <q-input
+            filled
+            v-model="login.password2"
+            label="Confirme sua senha"
+            lazy-rules
+            :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório']"
+            type="password"
+          />
+          <q-card-actions class="justify-between">
+            <!-- <q-btn
                 label="Criar uma conta"
                 color="secondary"
                 flat
                 to="signup"
               /> -->
-              <q-btn
-                label="Alterar senha"
-                type="submit"
-                color="primary"
-                v-if="showButtonSave"
-              />
-            </q-card-actions>
-          </q-form>
+            <q-btn
+              label="Alterar senha"
+              type="submit"
+              color="primary"
+              v-if="showButtonSave"
+              @click="changePassword"
+            />
+          </q-card-actions>
         </div>
       </div>
     </q-card>
@@ -107,6 +107,7 @@ export default {
                     "Senha alterada com sucesso",
                     "positive"
                   );
+                  this.login = {};
                   autenticacaoApi.sendEmail(
                     this.login.email,
                     "",

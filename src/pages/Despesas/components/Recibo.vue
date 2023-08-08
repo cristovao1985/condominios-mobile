@@ -4,7 +4,7 @@
       <q-img
         src="../../../../public/images/logo.png"
         spinner-color="white"
-        style="height: 140px; max-width: 150px"
+        style="height: 100px; max-width: 100px"
       />
       <p>
         Condomínio Residencial Morada do Sol <br />
