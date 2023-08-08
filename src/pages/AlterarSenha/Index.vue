@@ -4,7 +4,6 @@
       <div class="row">
         <div class="col q-ma-sm">
           <h6>Alterar senha do usuário</h6>
-
           <q-input
             filled
             type="text"
@@ -103,18 +102,20 @@ export default {
               .update("usuarios", this.login)
               .then((result) => {
                 if (result.success) {
+                  this.$router.push({ name: "login" });
+
                   ShowToastMixin.showToast(
                     "Senha alterada com sucesso",
                     "positive"
                   );
-                  this.login = {};
+
                   autenticacaoApi.sendEmail(
                     this.login.email,
                     "",
                     "senhaAlterada",
                     "Condomínio Morada do Sol - Senha alterada"
                   );
-                  this.$router.push({ name: "login" });
+                  this.login = {};
                 }
               })
               .catch((error) => {
