@@ -32,7 +32,7 @@
         label="Valor R$"
         type="number"
         min="1"
-        step="0.10"
+        step=".01"
         required
       />
       <q-input
