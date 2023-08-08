@@ -101,7 +101,7 @@ const routes = [
       {
         path: "/relatorios",
         name: "relatorios",
-        meta: { title: "Relatórios" },
+        meta: { title: "Prestação de contas" },
         component: () => import("pages/Relatorios/Index.vue"),
       },
       {

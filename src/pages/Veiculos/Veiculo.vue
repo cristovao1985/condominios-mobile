@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-ma-md">
-    <h6>{{ edit ? `Editar registro #${object.id}` : "Inserir registro" }}</h6>
+    <h6>{{ edit ? `Editar registro` : "Inserir registro" }}</h6>
     <q-form @submit="saveVeiculo" ref="form" class="q-gutter-md">
       <q-select
         v-model="object.id_condomino"

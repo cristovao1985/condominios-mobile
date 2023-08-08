@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-ma-md">
-    <h6>{{ edit ? `Editar registro #${object.id}` : "Inserir registro" }}</h6>
+    <h6>{{ edit ? `Editar registro` : "Inserir registro" }}</h6>
     <q-form @submit="saveDespesa" ref="form" class="q-gutter-md">
       <q-input
         v-model="object.beneficiario"
@@ -63,13 +63,13 @@ export default {
   data() {
     return {
       object: {
-        descricao: "Boleto",
+        descricao: "BOLETO",
         valor: 0,
         pago: 0,
         data_pagamento: "",
         mes: "",
         beneficiario: "",
-        categoria: "",
+        categoria: "BOLETO",
         id: "",
         ano: new Date().getFullYear(),
       },
@@ -94,6 +94,7 @@ export default {
         "ACORDOS",
         "ÁGUA",
         "ALIMENTAÇÃO",
+        "BOLETO",
         "DESPESAS GERAIS",
         "ENERGIA",
         "INSUMOS",
@@ -115,6 +116,9 @@ export default {
   },
   watch: {
     "object.categoria"() {
+      this.object.descricao = `${this.object.categoria} DE ${this.object.mes}`;
+    },
+    "object.mes"() {
       this.object.descricao = `${this.object.categoria} DE ${this.object.mes}`;
     },
   },

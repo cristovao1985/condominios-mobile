@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md">
+  <div>
     <q-markup-table>
       <thead>
         <tr>
@@ -51,6 +51,6 @@
 </template>
 <script>
 export default {
-  name:"TableSkeleton"
-}
+  name: "TableSkeleton",
+};
 </script>

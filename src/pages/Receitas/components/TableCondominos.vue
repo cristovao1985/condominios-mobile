@@ -7,12 +7,12 @@
       row-key="id"
       selection="multiple"
       v-model:selected="selected"
+      :pagination="pagination"
     >
     </q-table>
   </div>
 </template>
 <script>
-import ref from "vue";
 export default {
   name: "TableCondominos",
   props: {
@@ -47,6 +47,9 @@ export default {
         },
       ],
       selected: [],
+      pagination: {
+        rowsPerPage: 0,
+      },
     };
   },
   watch: {

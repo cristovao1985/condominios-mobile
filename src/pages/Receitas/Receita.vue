@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-ma-md">
-    <h6>{{ edit ? `Editar registro #${object.id}` : "Inserir registro" }}</h6>
+    <h6>{{ edit ? `Editar registro` : "Inserir registro" }}</h6>
     <q-form @submit="saveReceita" ref="form" class="q-gutter-md">
       <q-select
         v-model="object.id_condomino"
@@ -77,7 +77,7 @@ export default {
         id_condomino: null,
         mes: "",
         condomino: "",
-        categoria: "",
+        categoria: "TAXA DE CONDOMÍNIO",
         id: "",
         ano: new Date().getFullYear(),
       },
@@ -114,6 +114,9 @@ export default {
   },
   watch: {
     "object.categoria"() {
+      this.object.descricao = `${this.object.categoria} DE ${this.object.mes}`;
+    },
+    "object.mes"() {
       this.object.descricao = `${this.object.categoria} DE ${this.object.mes}`;
     },
   },

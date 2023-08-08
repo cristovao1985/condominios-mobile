@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-ma-md">
-    <h6>{{ edit ? `Editar registro #${object.id}` : "Inserir registro" }}</h6>
+    <h6>{{ edit ? `Editar registro` : "Inserir registro" }}</h6>
     <q-form @submit="saveProduct" ref="form" class="q-gutter-md">
       <q-input v-model="object.nome" label="Nome" required />
       <q-input v-model="object.cpf" label="CPF" mask="###.###.###-##" />

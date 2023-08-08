@@ -77,7 +77,7 @@ export default {
         id_condomino: null,
         mes: "",
         condomino: "",
-        categoria: "",
+        categoria: "TAXA DE CONDOMÍNIO",
         id: "",
         ano: new Date().getFullYear(),
       },
@@ -108,6 +108,14 @@ export default {
     },
     showBtnSave() {
       return this.selected.length;
+    },
+  },
+  watch: {
+    "object.categoria"() {
+      this.object.descricao = `${this.object.categoria} DE ${this.object.mes}`;
+    },
+    "object.mes"() {
+      this.object.descricao = `${this.object.categoria} DE ${this.object.mes}`;
     },
   },
   mixins: [ShowToastMixin],

@@ -34,7 +34,6 @@
     </div>
     <div class="row">
       <div class="col q-ma-sm">
-        <h6>Receitas</h6>
         <TableReceitas :data="receitas" />
         <!-- <table>
           <tr>
@@ -56,7 +55,6 @@
         </table> -->
       </div>
       <div class="col q-ma-sm">
-        <h6>Despesas</h6>
         <TableDespesas :data="despesas" />
         <!-- <table>
           <tr>

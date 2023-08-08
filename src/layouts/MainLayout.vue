@@ -95,8 +95,8 @@ const linksData = [
     link: "#/despesas",
   },
   {
-    title: "Relatórios",
-    caption: "Relatórios e prestação de contas",
+    title: "Financeiro",
+    caption: "Prestação de contas",
     icon: "request_page",
     link: "#/relatorios",
   },
