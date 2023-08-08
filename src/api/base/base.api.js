@@ -39,7 +39,7 @@ export default {
     return response.data;
   },
   insert: async (table, object) => {
-    object.usuario = user.nome;
+    object.usuario = await user.nome;
     var data = JSON.stringify({
       table: table,
       object: object,
@@ -55,7 +55,7 @@ export default {
     return response.data;
   },
   update: async (table, object) => {
-    object.usuario = user.nome;
+    object.usuario = await user.nome;
     var data = JSON.stringify({
       table: table,
       object: object,

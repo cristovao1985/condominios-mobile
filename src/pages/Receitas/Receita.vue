@@ -112,6 +112,11 @@ export default {
       return this.edit ? "Atualizar registro" : "Inserir registro";
     },
   },
+  watch: {
+    "object.categoria"() {
+      this.object.descricao = `${this.object.categoria} DE ${this.object.mes}`;
+    },
+  },
   mixins: [ShowToastMixin],
   async created() {
     this.getCondominos();
@@ -132,20 +137,18 @@ export default {
       }
     } else {
       this.edit = false;
-      //this.object = {};
-      //this.backToList();
+
       this.object.mes = new Date()
         .toLocaleString("pt-br", { month: "long" })
         .toUpperCase();
       this.object.data_pagamento = new Date().toISOString().split("T")[0];
+
+      this.object.descricao = `Taxa de condomínio de ${this.object.mes}`;
     }
   },
   methods: {
     async getCondominos() {
       await baseApi.get("condominos", "nome").then((result) => {
-        // result.data.forEach((item) => {
-        //   this.condominos.push({ label: item.nome, value: item.id });
-        // });
         this.condominos = result.data;
       });
     },

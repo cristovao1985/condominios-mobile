@@ -100,7 +100,10 @@ export default {
           }
         })
         .catch((error) => {
-          console.log(error);
+          ShowToastMixin.showToast(
+            "Houve um erro ao conectar ao servidor. Tente novamente",
+            "negative"
+          );
         });
     },
     openModal(modal) {

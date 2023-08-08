@@ -4,7 +4,7 @@
     <q-form @submit="saveDespesa" ref="form" class="q-gutter-md">
       <q-input
         v-model="object.beneficiario"
-        label="Fornecedor\Cobrador"
+        label="Fornecedor\Beneficiário"
         required
         autofocus
         placeholder="Digite para quem pagou o valor"
@@ -113,6 +113,11 @@ export default {
       return this.edit ? "Atualizar registro" : "Inserir registro";
     },
   },
+  watch: {
+    "object.categoria"() {
+      this.object.descricao = `${this.object.categoria} DE ${this.object.mes}`;
+    },
+  },
   mixins: [ShowToastMixin],
   async created() {
     if (this.$route.params.id) {
@@ -137,6 +142,8 @@ export default {
         .toLocaleString("pt-br", { month: "long" })
         .toUpperCase();
       this.object.data_pagamento = new Date().toISOString().split("T")[0];
+
+      this.object.descricao = `Boleto de ${this.object.mes}`;
     }
   },
   methods: {
