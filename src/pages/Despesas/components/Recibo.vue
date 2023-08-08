@@ -47,7 +47,7 @@ export default {
       window.print();
     },
     dateFormat(date) {
-      return formaters.date(date);
+      return formaters.receiptDate(date);
     },
   },
 };

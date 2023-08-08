@@ -8,9 +8,12 @@ export default {
       .replace(/T.*/, "")
       .split("-")
       .reverse()
-      .join("/"); //moment(date).format("l");
+      .join("/"); //
   },
   dateTime: (date) => {
     return moment(date).format("DD/MM/YYYY HH:MM");
+  },
+  receiptDate: (date) => {
+    return moment(date).format("DD/MM/YYYY");
   },
 };
