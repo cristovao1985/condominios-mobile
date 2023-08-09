@@ -25,7 +25,7 @@
             `${currentRoute() === "Home" ? "Morada do Sol" : currentRoute()}`
           }}
         </q-toolbar-title>
-        <div>v.BETA</div>
+        <div>v.1.0.0.0</div>
       </q-toolbar>
     </q-header>
 

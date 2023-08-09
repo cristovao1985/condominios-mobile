@@ -1,6 +1,7 @@
 <template>
   <q-page class="q-ma-md">
     <h6>Dashboard</h6>
+    <strong>Saúde financeira</strong>
     <div class="row">
       <div class="col q-ma-sm">
         <q-input
@@ -39,6 +40,8 @@
         R$ {{ (data.totalR - data.totalD).toFixed(2) }}
       </q-card>
     </div>
+
+    <strong>Métricas gerais</strong>
     <div class="row">
       <q-card class="col q-ma-sm q-pa-sm text-center">
         <q-btn flat color="primary" label="Condôminos" to="/condominos" />
@@ -46,11 +49,22 @@
         {{ data.totalC }}
       </q-card>
       <q-card class="col q-ma-sm q-pa-sm text-center">
-        <q-btn flat color="Secondary" label="Veículos" to="/veiculos" />
+        <q-btn flat color="secondary" label="Veículos" to="/veiculos" />
         <br />
         {{ data.totalV }}
       </q-card>
+      <q-card class="col q-ma-sm q-pa-sm text-center">
+        <q-btn
+          flat
+          color="warning"
+          label="Manutenções feitas"
+          to="/manutencoes"
+        />
+        <br />
+        {{ data.totalM }}
+      </q-card>
     </div>
+    <strong>Atenção</strong>
     <div v-if="ocorrencia">
       <q-expansion-item
         header-class="text-negative"
@@ -92,7 +106,7 @@ export default {
   name: "Home",
   data() {
     return {
-      data: { totalC: 0, totalD: 0, totalR: 0, totalV: 0 },
+      data: { totalC: 0, totalD: 0, totalR: 0, totalV: 0, totalM: 0 },
       meses: [
         "JANEIRO",
         "FEVEREIRO",
