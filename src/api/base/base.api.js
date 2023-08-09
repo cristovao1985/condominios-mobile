@@ -40,6 +40,8 @@ export default {
   },
   insert: async (table, object) => {
     object.usuario = await user.nome;
+    object.id_condominio = await user.tenant;
+    console.log(object)
     var data = JSON.stringify({
       table: table,
       object: object,
@@ -56,6 +58,7 @@ export default {
   },
   update: async (table, object) => {
     object.usuario = await user.nome;
+    object.id_condominio = await user.tenant;
     var data = JSON.stringify({
       table: table,
       object: object,

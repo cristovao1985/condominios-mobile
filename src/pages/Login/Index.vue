@@ -23,7 +23,7 @@
               type="password"
             />
             <q-card-actions class="justify-between">
-              <q-btn label="Acessar painel" type="submit" color="primary" />
+              <q-btn label="Acessar painel" type="submit" color="primary" :loading="loading"/>
               <q-btn
                 label="Esqueci minha senha"
                 flat
@@ -60,11 +60,13 @@ export default {
       showModal: {
         validate: false,
       },
+      loading:false
     };
   },
   mixins: [ShowToastMixin],
   methods: {
     async loginAccount() {
+      this.loading = true
       await autenticacaoApi
         .get("usuarios", this.login.user.trim(), this.login.password.trim())
         .then(async (result) => {
@@ -75,6 +77,7 @@ export default {
               "Usuário não encontrado. Verifique e tente novamente",
               "warning"
             );
+            this.loading = false
             return;
           }
 
@@ -89,6 +92,7 @@ export default {
                 nome: user.nome,
                 usuario: user.usuario,
                 expires_on: new Date(today).getTime(),
+                tenant: user.id_condominio
               });
               this.$router.push({ name: "home" });
             }
@@ -97,6 +101,8 @@ export default {
               "Usuário inativo. Verifique com o administrador do sistema.",
               "warning"
             );
+
+            this.loading = false
           }
         })
         .catch((error) => {
@@ -104,6 +110,8 @@ export default {
             "Houve um erro ao conectar ao servidor. Tente novamente",
             "negative"
           );
+
+          this.loading = false
         });
     },
     openModal(modal) {
