@@ -62,7 +62,7 @@ import autenticacaoApi from "../../api/autenticacao/autenticacao";
 import helpers from "../../helpers/session";
 import ShowToastMixin from "../../mixins/notify";
 export default {
-  name: "Reset",
+  name: "ResetPage",
   data() {
     return {
       login: {

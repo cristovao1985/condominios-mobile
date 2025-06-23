@@ -1,6 +1,6 @@
 import axios from "axios";
-const baseUrl = `${process.env.VUE_APP_API_BASE_URL}/despesas`;
-//const baseUrl = "http://localhost:9000/.netlify/functions/api/despesas";
+const baseUrl = "http://localhost:3001/.netlify/functions/api/base";
+const baseDespesasUrl = "http://localhost:3001/.netlify/functions/api/despesas";
 const headersJson = {
   Authorization: "Basic MTEyMzQ1Njc4OTA6MDk4NzY1NDMyMTE=",
   "Content-Type": "application/json",
@@ -19,7 +19,7 @@ export default {
 
     const response = await axios({
       method: "POST",
-      url: `${baseUrl}`,
+      url: `${baseDespesasUrl}`,
       data: data,
       headers: headersJson,
     });
@@ -83,7 +83,7 @@ export default {
 
     const response = await axios({
       method: "POST",
-      url: `${baseUrl}/dashboard`,
+      url: `${baseDespesasUrl}/dashboard`,
       data: data,
       headers: headersJson,
     });

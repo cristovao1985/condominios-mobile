@@ -21,7 +21,7 @@
 
 <script>
 import baseApi from "src/api/base/base.api";
-import TableCondominos from "../Condominos/components/Table.vue";
+import TableCondominos from "./components/Table.vue";
 import DeleteCondominoModal from "./components/DeleteCondominoModal.vue";
 import ShowToastMixin from "../../mixins/notify";
 import TableSkeleton from "src/components/TableSkeleton.vue";

@@ -32,7 +32,7 @@
 import baseApi from "src/api/base/base.api";
 import ShowToastMixin from "../../mixins/notify";
 export default {
-  name: "Ocorrencia",
+  name: "OcorrenciaPage",
   data() {
     return {
       object: {
@@ -76,6 +76,7 @@ export default {
       });
     },
     async insert() {
+      delete this.object.id
       await baseApi
         .insert(this.tableName, this.object)
         .then(() => {

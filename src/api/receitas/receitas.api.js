@@ -1,7 +1,6 @@
 import axios from "axios";
-
-const baseUrl = `${process.env.VUE_APP_API_BASE_URL}/receitas`;
-//const baseUrl = "http://localhost:9000/.netlify/functions/api/receitas";
+const baseUrl = "http://localhost:3001/.netlify/functions/api/base";
+const baseReceitasUrl = "http://localhost:3001/.netlify/functions/api/receitas";
 const headersJson = {
   Authorization: "Basic MTEyMzQ1Njc4OTA6MDk4NzY1NDMyMTE=",
   "Content-Type": "application/json",
@@ -20,7 +19,7 @@ export default {
 
     const response = await axios({
       method: "POST",
-      url: `${baseUrl}`,
+      url: `${baseReceitasUrl}`,
       data: data,
       headers: headersJson,
     });
@@ -34,14 +33,14 @@ export default {
 
     const response = await axios({
       method: "POST",
-      url: `${baseUrl}/${id}`,
+      url: `${baseUrl}/id/${id}`,
       data: data,
       headers: headersJson,
     });
 
     return response.data;
   },
-  insert: async (table, object) => {
+  insert: async (table="receitas", object) => {
     object.id_condominio = await user.tenant;
     var data = JSON.stringify({
       table: table,
@@ -97,7 +96,7 @@ export default {
 
     const response = await axios({
       method: "POST",
-      url: `${baseUrl}/dashboard`,
+      url: `${baseReceitasUrl}/dashboard`,
       data: data,
       headers: headersJson,
     });

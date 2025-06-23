@@ -52,7 +52,7 @@
 import baseApi from "src/api/base/base.api";
 import ShowToastMixin from "../../mixins/notify";
 export default {
-  name: "Condomino",
+  name: "CondominoPage",
   data() {
     return {
       object: {
@@ -79,7 +79,7 @@ export default {
     if (this.$route.params.id) {
       this.edit = true;
       await this.getCondomino();
-      this.object.nascimento = this.object.nascimento.substring(0, 10);
+      this.object.nascimento = this.object?.nascimento?.substring(0, 10);
     } else {
       this.edit = false;
       this.object = {

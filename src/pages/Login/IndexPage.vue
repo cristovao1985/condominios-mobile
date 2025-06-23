@@ -47,7 +47,7 @@ import helpers from "../../helpers/session";
 import ShowToastMixin from "../../mixins/notify";
 import ValidarUsuarioModal from "./components/ValidarUsuarioModal.vue";
 export default {
-  name: "Login",
+  name: "LoginPage",
   components: {
     ValidarUsuarioModal,
   },

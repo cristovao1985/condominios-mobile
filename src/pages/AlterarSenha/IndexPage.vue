@@ -60,7 +60,7 @@
 import autenticacaoApi from "../../api/autenticacao/autenticacao";
 import ShowToastMixin from "../../mixins/notify";
 export default {
-  name: "Index",
+  name: "IndexPage",
   data() {
     return {
       login: {

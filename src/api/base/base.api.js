@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const baseUrl = `${process.env.VUE_APP_API_BASE_URL}/base`;
+const baseUrl = "http://localhost:3001/.netlify/functions/api/base";
 const headersJson = {
   Authorization: "Basic MTEyMzQ1Njc4OTA6MDk4NzY1NDMyMTE=",
   "Content-Type": "application/json",
@@ -31,7 +30,7 @@ export default {
 
     const response = await axios({
       method: "POST",
-      url: `${baseUrl}/${id}`,
+      url: `${baseUrl}/id/${id}`,
       data: data,
       headers: headersJson,
     });

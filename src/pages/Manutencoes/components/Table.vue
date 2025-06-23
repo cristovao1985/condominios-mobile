@@ -105,6 +105,13 @@ export default {
           sortable: true,
         },
         {
+          name: "endereco",
+          label: "Unidade",
+          field: "endereco",
+          align: "left",
+          sortable: true,
+        },
+        {
           name: "titulo",
           label: "Título",
           field: "titulo",

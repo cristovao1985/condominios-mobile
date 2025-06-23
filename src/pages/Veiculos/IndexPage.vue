@@ -1,50 +1,51 @@
 <template>
   <q-page class="q-ma-md">
     <TableSkeleton v-if="loading" />
-    <TableOcorrencias
-      :data="ocorrencias"
+    <TableVeiculos
+      :data="veiculos"
       v-else
-      @add="addOcorrencia"
-      @edit="editOcorrencia"
+      @add="addVeiculo"
+      @edit="editVeiculo"
       @delete="openModal"
       :access="acessos"
     />
-    <DeleteOcorrenciaModal
+    <DeleteVeiculoModal
       :data="showModal.delete"
       @closeModal="closeModal"
-      :ocorrencia="ocorrencia"
-      @confirm="deleteOcorrencia"
+      :veiculo="veiculo"
+      @confirm="deleteVeiculo"
     />
   </q-page>
 </template>
 
 <script>
 import baseApi from "src/api/base/base.api";
-import TableOcorrencias from "../Ocorrencias/components/Table.vue";
-import DeleteOcorrenciaModal from "./components/DeleteOcorrenciaModal.vue";
+import veiculosApi from "src/api/veiculos/veiculos.api";
+import TableVeiculos from "./components/Table.vue";
+import DeleteVeiculoModal from "./components/DeleteVeiculoModal.vue";
 import ShowToastMixin from "../../mixins/notify";
 import TableSkeleton from "src/components/TableSkeleton.vue";
 import acessosApi from "../../api/acessos/acessos";
 export default {
   name: "IndexPage",
   components: {
-    TableOcorrencias,
-    DeleteOcorrenciaModal,
+    TableVeiculos,
+    DeleteVeiculoModal,
     TableSkeleton,
   },
   data() {
     return {
-      ocorrencias: [],
+      veiculos: [{ ativo: 1, cpf: null, endereco: "Bloco B1 Ap 203" }],
       loading: false,
-      tableName: "ocorrencias",
+      tableName: "veiculos",
       showModal: {
         delete: false,
       },
-      ocorrencia: {},
+      veiculo: {},
       acessos: { criar: 0, editar: 0, ler: 1, deletar: 0 },
     };
   },
-  async created() {
+  created() {
     this.getAcessos();
     this.getAll();
   },
@@ -52,10 +53,11 @@ export default {
   methods: {
     async getAll() {
       this.loading = true;
-      await baseApi
-        .get(this.tableName, "data")
+      await veiculosApi
+        .get(this.tableName, "descricao")
         .then((result) => {
-          this.ocorrencias = result.data;
+          this.veiculos = result.data;
+
           this.loading = false;
         })
         .catch((error) => {
@@ -63,21 +65,21 @@ export default {
           this.loading = false;
         });
     },
-    addOcorrencia() {
-      this.$router.push({ name: "ocorrencia" });
+    addVeiculo() {
+      this.$router.push({ name: "veiculo" });
     },
-    editOcorrencia(ocorrencia) {
+    editVeiculo(veiculo) {
       this.$router.push({
-        name: "ocorrencia",
-        params: { id: ocorrencia.id },
+        name: "veiculo",
+        params: { id: veiculo.id },
       });
     },
-    async deleteOcorrencia(ocorrencia) {
+    async deleteVeiculo(veiculo) {
       await baseApi
-        .remove("ocorrencias", ocorrencia)
+        .remove("veiculos", veiculo)
         .then(() => {
           ShowToastMixin.showToast(
-            `${ocorrencia.titulo} deletado com sucesso!`,
+            `${veiculo.descricao} deletado com sucesso!`,
             "positive"
           );
         })
@@ -88,8 +90,8 @@ export default {
       this.closeModal("delete");
       this.getAll();
     },
-    openModal({ modal, ocorrencia }) {
-      this.ocorrencia = ocorrencia;
+    openModal({ modal, veiculo }) {
+      this.veiculo = veiculo;
       this.showModal[modal] = true;
     },
     closeModal(modal) {

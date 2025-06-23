@@ -41,7 +41,7 @@
 <script>
 import baseApi from "src/api/base/base.api";
 import receitasApi from "src/api/receitas/receitas.api";
-import TableReceitas from "../Receitas/components/Table.vue";
+import TableReceitas from "./components/Table.vue";
 import DeleteReceitaModal from "./components/DeleteReceitaModal.vue";
 import ShowToastMixin from "../../mixins/notify";
 import TableSkeleton from "src/components/TableSkeleton.vue";

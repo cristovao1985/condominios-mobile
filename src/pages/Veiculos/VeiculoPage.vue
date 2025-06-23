@@ -1,31 +1,20 @@
 <template>
   <q-page class="q-ma-md">
     <h6>{{ edit ? `Editar registro` : "Inserir registro" }}</h6>
-    <q-form @submit="saveManutencao" ref="form" class="q-gutter-md">
+    <q-form @submit="saveVeiculo" ref="form" class="q-gutter-md">
       <q-select
         v-model="object.id_condomino"
         :options="condominos"
-        label="Solicitante"
+        label="Proprietário"
         option-value="id"
         option-label="nome"
         emit-value
         map-options
         :value="object.condomino"
         required
-        autofocus
-        placeholder="Selecione solicitante"
       />
-      <q-input v-model="object.titulo" label="Título" required />
-      <q-editor v-model="object.descricao" label="Descrição" />
-
-      <q-input v-model="object.data" label="Data" type="date" />
-      <q-checkbox
-        v-model="object.feito"
-        label="Feito?"
-        :true-value="1"
-        :false-value="0"
-        :value="object.feito"
-      />
+      <q-input v-model="object.descricao" label="Descrição" required />
+      <q-input v-model="object.placa" label="Placa" required />
 
       <div class="q-mt-md">
         <q-btn
@@ -43,29 +32,19 @@ import baseApi from "src/api/base/base.api";
 
 import ShowToastMixin from "../../mixins/notify";
 export default {
-  name: "Receita",
+  name: "VeiculoPage",
   data() {
     return {
       object: {
-        id_condomino: "",
         descricao: "",
-        data: "",
-        feito: 0,
-        condomino: "",
+        placa: "",
+        id_condomino: "",
         id: "",
-        titulo: "",
+        condomino: "",
       },
-      edit: false,
-      tableName: "manutencoes",
+      tableName: "veiculos",
       condominos: [],
-      categorias: [
-        "ÁGUA",
-        "ENERGIA",
-        "ALVENARIA",
-        "ENCANAMENTO",
-        "RETIRADA DE LIXO/ENTULHOS",
-        "OUTROS",
-      ],
+      edit: false,
     };
   },
   computed: {
@@ -74,29 +53,28 @@ export default {
     },
   },
   mixins: [ShowToastMixin],
-  async created() {
+  created() {
     this.getCondominos();
 
     if (this.$route.params.id) {
       this.edit = true;
-      await this.getManutencao();
-      if (this.edit) {
-        this.object.data = this.object.data.substring(0, 10);
-      } else {
-        this.object.mes = new Date()
-          .toLocaleString("pt-br", { month: "long" })
-          .toUpperCase();
-        this.object = new Date().toISOString().split("T")[0];
-      }
+      this.getVeiculo();
     } else {
       this.edit = false;
-
-      this.object.data = new Date().toISOString().split("T")[0];
+      this.object = {};
+      //this.backToList();
     }
   },
   methods: {
-    async saveManutencao() {
-      delete this.object.condomino;
+    async getCondominos() {
+      await baseApi.get("condominos", "nome").then((result) => {
+        // result.data.forEach((item) => {
+        //   this.condominos.push({ label: item.nome, value: item.id });
+        // });
+        this.condominos = result.data;
+      });
+    },
+    async saveVeiculo() {
       this.$refs.form.validate().then(() => {
         if (this.edit) {
           this.update();
@@ -106,6 +84,10 @@ export default {
       });
     },
     async insert() {
+      if (!this.object.id_condomino) {
+        ShowToastMixin.showToast("Informe um condomino válido", "warning");
+        return;
+      }
       await baseApi
         .insert(this.tableName, this.object)
         .then(() => {
@@ -120,6 +102,9 @@ export default {
         });
     },
     async update() {
+      delete this.object.condomino;
+      delete this.object.endereco;
+
       await baseApi
         .update(this.tableName, this.object)
         .then(() => {
@@ -136,7 +121,7 @@ export default {
     backToList() {
       this.$router.push({ name: this.tableName });
     },
-    async getManutencao() {
+    async getVeiculo() {
       await baseApi
         .getById(this.tableName, this.$route.params.id)
         .then((result) => {
@@ -144,14 +129,6 @@ export default {
             this.object = result.data[0];
           }
         });
-    },
-    async getCondominos() {
-      await baseApi.get("condominos", "nome").then((result) => {
-        // result.data.forEach((item) => {
-        //   this.condominos.push({ label: item.nome, value: item.id });
-        // });
-        this.condominos = result.data;
-      });
     },
   },
 };

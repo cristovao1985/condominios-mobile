@@ -1,67 +1,49 @@
 <template>
   <q-page class="q-ma-md">
-    <div class="row">
-      <div class="col q-ma-sm">
-        <q-select
-          v-model="filter.ano"
-          :options="anos"
-          label="Ano base"
-          required
-        />
-      </div>
-      <div class="col q-ma-sm">
-        <q-select
-          v-model="filter.mes"
-          :options="meses"
-          label="Mês de referência"
-          required
-        />
-      </div>
-    </div>
     <TableSkeleton v-if="loading" />
-    <TableDespesas
-      :data="despesas"
+    <TableManutencoes
+      :data="manutencoes"
       v-else
-      @add="addDespesa"
-      @edit="editDespesa"
+      @add="addManutencao"
+      @edit="editManutencao"
       @delete="openModal"
-      @recibo="openRecibo"
+      @ordem="openOrdem"
       :access="acessos"
     />
-    <DeleteDespesaModal
+    <DeleteManutencaoModal
       :data="showModal.delete"
       @closeModal="closeModal"
-      :despesa="despesa"
-      @confirm="deleteDespesa"
+      :manutencao="manutencao"
+      @confirm="deleteManutencao"
     />
   </q-page>
 </template>
 
 <script>
 import baseApi from "src/api/base/base.api";
-import despesasApi from "src/api/despesas/despesas.api";
-import TableDespesas from "../Despesas/components/Table.vue";
-import DeleteDespesaModal from "./components/DeleteDespesaModal.vue";
+import manutencoesApi from "src/api/manutencoes/manutencoes.api";
+import TableManutencoes from "./components/Table.vue";
+import DeleteManutencaoModal from "./components/DeleteManutencaoModal.vue";
 import ShowToastMixin from "../../mixins/notify";
 import TableSkeleton from "src/components/TableSkeleton.vue";
 import acessosApi from "../../api/acessos/acessos";
 export default {
   name: "IndexPage",
   components: {
-    TableDespesas,
-    DeleteDespesaModal,
+    TableManutencoes,
+    DeleteManutencaoModal,
     TableSkeleton,
   },
   data() {
     return {
-      despesas: [],
-      receitasTemp: [],
+      manutencoes: [],
+      manutencoesTemp: [],
       loading: false,
-      tableName: "despesas",
+      tableName: "manutencoes",
       showModal: {
         delete: false,
       },
-      despesa: {},
+      manutencao: {},
       meses: [
         "JANEIRO",
         "FEVEREIRO",
@@ -75,7 +57,6 @@ export default {
         "OUTUBRO",
         "NOVEMBRO",
         "DEZEMBRO",
-        "TODOS",
       ],
       anos: [2021, 2022, 2023, 2024, 2025, 2026],
       filter: {
@@ -103,10 +84,10 @@ export default {
   methods: {
     async getAll() {
       this.loading = true;
-      await despesasApi
+      await manutencoesApi
         .get(this.tableName, "id", this.filter.ano, this.filter.mes)
         .then((result) => {
-          this.despesas = result.data;
+          this.manutencoes = result.data;
 
           this.loading = false;
         })
@@ -115,21 +96,21 @@ export default {
           this.loading = false;
         });
     },
-    addDespesa() {
-      this.$router.push({ name: "despesa" });
+    addManutencao() {
+      this.$router.push({ name: "manutencao" });
     },
-    editDespesa(despesa) {
+    editManutencao(manutencao) {
       this.$router.push({
-        name: "despesa",
-        params: { id: despesa.id },
+        name: "manutencao",
+        params: { id: manutencao.id },
       });
     },
-    async deleteDespesa(despesa) {
+    async deleteManutencao(manutencao) {
       await baseApi
-        .remove(this.tableName, despesa)
+        .remove(this.tableName, manutencao)
         .then(() => {
           ShowToastMixin.showToast(
-            `${despesa.descricao} deletada com sucesso!`,
+            `${manutencao.descricao} deletada com sucesso!`,
             "positive"
           );
         })
@@ -140,18 +121,18 @@ export default {
       this.closeModal("delete");
       this.getAll();
     },
-    openModal({ modal, despesa }) {
-      this.despesa = despesa;
+    openModal({ modal, manutencao }) {
+      this.manutencao = manutencao;
       this.showModal[modal] = true;
     },
     closeModal(modal) {
       this.showModal[modal] = false;
     },
-    async openRecibo(despesa) {
+    async openOrdem(manutencao) {
       const route = this.$router.resolve({
-        name: "recibo-despesa",
-        query: { data: JSON.stringify(despesa) },
-        params: { data: JSON.stringify(despesa) },
+        name: "ordem-manutencao",
+        query: { data: JSON.stringify(manutencao) },
+        params: { data: JSON.stringify(manutencao) },
       });
 
       window.open(route.href, "_blank");

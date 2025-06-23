@@ -59,7 +59,7 @@ import baseApi from "src/api/base/base.api";
 
 import ShowToastMixin from "../../mixins/notify";
 export default {
-  name: "Receita",
+  name: "ReceitaPage",
   data() {
     return {
       object: {
@@ -165,6 +165,7 @@ export default {
         ShowToastMixin.showToast("Informe um mês de referência", "warning");
         return;
       }
+      delete this.object.id
       await baseApi
         .insert(this.tableName, this.object)
         .then(() => {

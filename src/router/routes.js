@@ -1,6 +1,6 @@
 import ReciboReceita from "../pages/Receitas/components/Recibo.vue";
 import ReciboDespesa from "../pages/Despesas/components/Recibo.vue";
-import CondominoPage from "../pages/Condominos/Condomino.vue";
+import CondominoPage from "../pages/Condominos/CondominoPage.vue";
 import PrestacaoContasMes from "../pages/Relatorios/components/PrestacaoContasMes";
 import OrdemManutencao from "../pages/Manutencoes/components/OrdemManutencao.vue";
 
@@ -14,18 +14,18 @@ const routes = [
       {
         path: "/login",
         name: "login",
-        component: () => import("pages/Login/Index.vue"),
+        component: () => import("src/pages/Login/IndexPage.vue"),
       },
       {
         path: "/reset",
         name: "reset",
-        component: () => import("pages/Login/Reset.vue"),
+        component: () => import("src/pages/Login/ResetPage.vue"),
       },
       {
         path: "/password",
         name: "password",
         props: true,
-        component: () => import("pages/AlterarSenha/Index.vue"),
+        component: () => import("src/pages/AlterarSenha/IndexPage.vue"),
       },
     ],
   },
@@ -44,7 +44,7 @@ const routes = [
         path: "/condominos",
         name: "condominos",
         meta: { title: "Condominos" },
-        component: () => import("pages/Condominos/Index.vue"),
+        component: () => import("src/pages/Condominos/IndexPage.vue"),
       },
       {
         path: "/condomino/:id?",
@@ -57,78 +57,78 @@ const routes = [
         path: "/veiculos",
         name: "veiculos",
         meta: { title: "Veículos" },
-        component: () => import("pages/Veiculos/Index.vue"),
+        component: () => import("src/pages/Veiculos/IndexPage.vue"),
       },
       {
         path: "/veiculo/:id?",
         name: "veiculo",
         props: true,
         meta: { title: "Veículo" },
-        component: () => import("pages/Veiculos/Veiculo.vue"),
+        component: () => import("src/pages/Veiculos/VeiculoPage.vue"),
       },
       {
         path: "/receitas",
         name: "receitas",
         meta: { title: "Receitas" },
-        component: () => import("pages/Receitas/Index.vue"),
+        component: () => import("src/pages/Receitas/IndexPage.vue"),
       },
       {
         path: "/recorrencia",
         name: "recorrencia",
         meta: { title: "Recorrência" },
-        component: () => import("pages/Receitas/Recorrencia.vue"),
+        component: () => import("src/pages/Receitas/RecorrenciaPage.vue"),
       },
       {
         path: "/receita/:id?",
         name: "receita",
         props: true,
         meta: { title: "Receita" },
-        component: () => import("pages/Receitas/Receita.vue"),
+        component: () => import("src/pages/Receitas/ReceitaPage.vue"),
       },
       {
         path: "/despesas",
         name: "despesas",
         meta: { title: "Despesas" },
-        component: () => import("pages/Despesas/Index.vue"),
+        component: () => import("src/pages/Despesas/IndexPage.vue"),
       },
       {
         path: "/despesa/:id?",
         name: "despesa",
         props: true,
         meta: { title: "Despesa" },
-        component: () => import("pages/Despesas/Despesa.vue"),
+        component: () => import("src/pages/Despesas/DespesaPage.vue"),
       },
       {
         path: "/relatorios",
         name: "relatorios",
         meta: { title: "Prestação de contas" },
-        component: () => import("pages/Relatorios/Index.vue"),
+        component: () => import("src/pages/Relatorios/IndexPage.vue"),
       },
       {
         path: "/ocorrencias",
         name: "ocorrencias",
         meta: { title: "Ocorrências" },
-        component: () => import("pages/Ocorrencias/Index.vue"),
+        component: () => import("src/pages/Ocorrencias/IndexPage.vue"),
       },
       {
         path: "/ocorrencia/:id?",
         name: "ocorrencia",
         props: true,
         meta: { title: "Ocorrência" },
-        component: () => import("pages/Ocorrencias/Ocorrencia.vue"),
+        component: () => import("src/pages/Ocorrencias/OcorrenciaPage.vue"),
       },
       {
         path: "/manutencoes",
         name: "manutencoes",
         meta: { title: "Manutenções" },
-        component: () => import("pages/Manutencoes/Index.vue"),
+        component: () => import("src/pages/Manutencoes/IndexPage.vue"),
       },
       {
         path: "/manutencao/:id?",
         name: "manutencao",
         props: true,
         meta: { title: "Manutenção" },
-        component: () => import("pages/Manutencoes/Manutencao.vue"),
+        component: () => import("src/pages/Manutencoes/ManutencaoPage.vue"),
       },
     ],
   },

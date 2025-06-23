@@ -2,12 +2,13 @@ import axios from "axios";
 //const baseUrl = "http://localhost:9000/.netlify/functions/api/acessos";
 const baseUrl = `${process.env.VUE_APP_API_BASE_URL}/acessos`;
 
+import helpers from "../../helpers/session";
+const user = helpers.getCurrentUser();
 const headersJson = {
   Authorization: "Basic MTEyMzQ1Njc4OTA6MDk4NzY1NDMyMTE=",
   "Content-Type": "application/json",
+  "X-Tenant": user?.tenant,
 };
-import helpers from "../../helpers/session";
-const user = helpers.getCurrentUser();
 
 export default {
   get: async (page) => {
@@ -19,7 +20,7 @@ export default {
 
     const response = await axios({
       method: "POST",
-      url: `${baseUrl}`,
+      url: `${baseUrl}/page`,
       data: data,
       headers: headersJson,
     });
