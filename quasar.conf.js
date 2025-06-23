@@ -48,12 +48,12 @@ module.exports = configure(function (ctx) {
       env: {
         VUE_APP_API_EMAIL_SERVICE_URL:
           process.env.NODE_MODULE === "production"
-            ? "https://api-condominios-api.ucgkrp.easypanel.host/api/emailservices"
-            : "https://api-condominios-api.ucgkrp.easypanel.host/api/emailservices",
+            ? "https://api-condominios-api.ucgkrp.easypanel.host/v1/api/emailservices"
+            : "https://api-condominios-api.ucgkrp.easypanel.host/v1/api/emailservices",
         VUE_APP_API_BASE_URL:
           process.env.NODE_MODULE === "production"
-            ? "https://api-condominios-api.ucgkrp.easypanel.host/api"
-            : "https://api-condominios-api.ucgkrp.easypanel.host/api",
+            ? "https://api-condominios-api.ucgkrp.easypanel.host/v1/api"
+            : "https://api-condominios-api.ucgkrp.easypanel.host/v1/api",
       },
       // transpile: false,
       // publicPath: '/',
