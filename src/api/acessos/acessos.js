@@ -1,5 +1,4 @@
 import axios from "axios";
-//const baseUrl = "http://localhost:9000/.netlify/functions/api/acessos";
 const baseUrl = `${process.env.VUE_APP_API_BASE_URL}/acessos`;
 
 import helpers from "../../helpers/session";
