@@ -50,8 +50,7 @@
       />
       <q-input
         v-model="object.codigo_pagamento"
-        label="Código para pagamento"       
-        required
+        label="Código para pagamento"
       />
 
       <div class="q-mt-md">
@@ -85,7 +84,7 @@ export default {
         categoria: "TAXA DE CONDOMÍNIO",
         id: "",
         ano: new Date().getFullYear(),
-        codigo_pagamento:""
+        codigo_pagamento: "",
       },
       tableName: "receitas",
       condominos: [],
@@ -160,12 +159,11 @@ export default {
       await baseApi.get("condominos", "nome").then((result) => {
         //this.condominos = result.data;
         result.data.forEach((condomino) => {
-          if(condomino.proprietario){
+          if (condomino.proprietario) {
             condomino.nome = `${condomino.nome} | ${condomino.endereco}`;
-            this.condominos.push(condomino)
+            this.condominos.push(condomino);
           }
         });
-        
       });
     },
     async saveReceita() {

@@ -119,9 +119,7 @@ export default {
             ShowToastMixin.showToast(result.message, "negative");
           }
         })
-        .catch((error) => {
-          console.log(error);
-          
+        .catch((error) => {          
           ShowToastMixin.showToast(error.message, "negative");
         });
     },
