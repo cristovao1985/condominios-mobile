@@ -5,7 +5,7 @@ const headersJson = {
   "Content-Type": "application/json",
 };
 import helpers from "../../helpers/session";
-const user = helpers.getCurrentUser();
+const user = await helpers.getCurrentUser();
 
 export default {
   get: async (table, order) => {

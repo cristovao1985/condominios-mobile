@@ -120,6 +120,8 @@ export default {
           }
         })
         .catch((error) => {
+          console.log(error);
+          
           ShowToastMixin.showToast(error.message, "negative");
         });
     },

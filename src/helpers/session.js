@@ -5,7 +5,7 @@ export default {
   loggout: () => {
     localStorage.clear();
   },
-  getCurrentUser: () => {
+  getCurrentUser: async () => {
     const user = JSON.parse(localStorage.getItem("user"));
 
     return user;

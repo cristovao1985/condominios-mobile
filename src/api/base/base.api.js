@@ -5,7 +5,7 @@ const headersJson = {
   "Content-Type": "application/json",
 };
 import helpers from "../../helpers/session";
-const user = helpers.getCurrentUser();
+const user = await helpers.getCurrentUser();
 
 export default {
   get: async (table, order = "id") => {
@@ -38,7 +38,7 @@ export default {
     return response.data;
   },
   insert: async (table, object) => {
-    object.usuario = await user.nome;
+    object.usuario = await user?.nome;
     object.id_condominio = await user.tenant;
     console.log(object)
     var data = JSON.stringify({
