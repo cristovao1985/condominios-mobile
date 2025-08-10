@@ -14,7 +14,7 @@
         required
       />
       <q-input v-model="object.descricao" label="Descrição" required />
-      <q-input v-model="object.placa" label="Placa" required />
+      <q-input v-model="object.placa" label="Placa" required  mask="AAA-XXXX"/>
 
       <div class="q-mt-md">
         <q-btn
