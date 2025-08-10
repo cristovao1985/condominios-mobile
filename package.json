@@ -6,7 +6,7 @@
   "author": "Cristovao Jandson <cristovaojandson@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "quasar dev",
+    "dev": "cross-env NODE_MODULES=development quasar dev",
     "build": "quasar build",
     "build:pwa": "quasar build -m pwa -d"
   },
