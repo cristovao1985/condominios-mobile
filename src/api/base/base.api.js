@@ -5,7 +5,7 @@ const user = await helpers.getCurrentUser();
 const headersJson = {
   Authorization: "Basic MTEyMzQ1Njc4OTA6MDk4NzY1NDMyMTE=",
   "Content-Type": "application/json",
-  'X-Tenant': user.tenant
+  'X-Tenant': user?.tenant
 };
 
 export default {
