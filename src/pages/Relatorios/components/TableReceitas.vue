@@ -8,6 +8,7 @@
       title="Receitas"
       flat
       dense
+      :pagination="pagination"
     >
       <template v-slot:body-cell-data_pagamento="props">
         <td class="text-left">
@@ -54,6 +55,9 @@ export default {
           align: "left",
         },
       ],
+      pagination: {
+        rowsPerPage: 0,
+      },
     };
   },
   methods: {

@@ -89,6 +89,7 @@ export default {
         email: "",
         ativo: 1,
         endereco: "",
+        proprietario:1
       };
       //this.backToList();
     }
