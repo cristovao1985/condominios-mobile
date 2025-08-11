@@ -95,13 +95,20 @@ export default {
         "ÁGUA",
         "ALIMENTAÇÃO",
         "BOLETO",
+        "COMBUSTÍVEL",
+        "DESPESA DE PESSOAL",
         "DESPESAS GERAIS",
+        "EPI",
         "ENERGIA",
         "INSUMOS",
+        "INTERNET",
+        "MANUTENÇÃO E REPARO",
         "MATERIAL DE ESCRITÓRIO",
         "MULTAS",
         "PRESTADORES DE SERVIÇOS",
         "REFEIÇÃO",
+        "SEGURANÇA",
+        "SEGUROS E LICENÇAS",
         "SERVIÇOS",
         "TAXAS",
         "TRANSPORTE",
@@ -165,7 +172,7 @@ export default {
         ShowToastMixin.showToast("Informe um mês de referência", "warning");
         return;
       }
-      delete this.object.id
+      delete this.object.id;
       await baseApi
         .insert(this.tableName, this.object)
         .then(() => {

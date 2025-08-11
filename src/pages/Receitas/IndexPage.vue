@@ -81,9 +81,9 @@ export default {
       anos: [2021, 2022, 2023, 2024, 2025, 2026],
       filter: {
         ano: new Date().getFullYear(),
-        mes: new Date()
-          .toLocaleString("pt-br", { month: "long" })
-          .toUpperCase(),
+        mes:
+          localStorage.getItem("mes-receita") ||
+          new Date().toLocaleString("pt-br", { month: "long" }).toUpperCase(),
       },
       acessos: { criar: 0, editar: 0, ler: 1, deletar: 0 },
     };
@@ -104,6 +104,8 @@ export default {
   methods: {
     async getAll() {
       this.loading = true;
+      localStorage.setItem("ano-receita", this.filter.ano);
+      localStorage.setItem("mes-receita", this.filter.mes);
       await receitasApi
         .get(this.tableName, "data_pagamento", this.filter.ano, this.filter.mes)
         .then((result) => {

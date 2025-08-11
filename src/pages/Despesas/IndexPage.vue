@@ -80,15 +80,15 @@ export default {
       anos: [2021, 2022, 2023, 2024, 2025, 2026],
       filter: {
         ano: new Date().getFullYear(),
-        mes: new Date()
-          .toLocaleString("pt-br", { month: "long" })
-          .toUpperCase(),
+        mes:
+          localStorage.getItem("mes-despesa") ||
+          new Date().toLocaleString("pt-br", { month: "long" }).toUpperCase(),
       },
       acessos: { criar: 0, editar: 0, ler: 1, deletar: 0 },
     };
   },
   created() {
-    this.getAcessos();
+      this.getAcessos();
     this.getAll();
   },
   mixins: [ShowToastMixin],
@@ -103,6 +103,8 @@ export default {
   methods: {
     async getAll() {
       this.loading = true;
+      localStorage.setItem("ano-despesa", this.filter.ano);
+      localStorage.setItem("mes-despesa", this.filter.mes);
       await despesasApi
         .get(this.tableName, "id", this.filter.ano, this.filter.mes)
         .then((result) => {
