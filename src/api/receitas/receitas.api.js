@@ -41,7 +41,7 @@ export default {
     return response.data;
   },
   insert: async (table="receitas", object) => {
-    object.id_condominio = await user.tenant;
+    object.id_condominio = await user?.tenant;
     var data = JSON.stringify({
       table: table,
       object: object,

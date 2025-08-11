@@ -28,7 +28,7 @@ export default {
   },
   insert: async (table, object) => {
     object.usuario = user.nome;
-    object.id_condominio = await user.tenant;
+    object.id_condominio = await user?.tenant;
     var data = JSON.stringify({
       table: table,
       object: object,

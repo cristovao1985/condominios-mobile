@@ -68,7 +68,7 @@ export default {
     async loginAccount() {
       this.loading = true
       await autenticacaoApi
-        .get("usuarios", this.login.user.trim(), this.login.password.trim())
+        .get("usuarios", this.login.user.toLocaleLowerCase().trim(), this.login.password.trim())
         .then(async (result) => {
           const user = result.data[0];
 
