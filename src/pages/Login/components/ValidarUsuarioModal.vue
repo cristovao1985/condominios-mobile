@@ -28,7 +28,7 @@
         </q-card-section>
         <q-card-actions align="right">
           <q-btn flat label="Cancelar" @click="closeModal" />
-          <q-btn flat label="Solicitar" color="primary" @click="validate" />
+          <q-btn label="Solicitar" color="primary" @click="validate" />
         </q-card-actions>
       </q-card>
     </q-dialog>

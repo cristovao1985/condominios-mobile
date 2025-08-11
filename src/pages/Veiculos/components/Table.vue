@@ -10,6 +10,7 @@
       class="my-sticky-column-table"
       :pagination="pagination"
       rows-per-page-label="Linhas por página"
+      dense
     >
       <template v-slot:top>
         <q-input

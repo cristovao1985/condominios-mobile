@@ -10,6 +10,7 @@
       class="my-sticky-column-table"
       :pagination="pagination"
       rows-per-page-label="Linhas por página"
+      dense
     >
       <template v-slot:top>
         <q-input
@@ -51,6 +52,7 @@
           <q-chip
             outline
             :color="props.row.proprietario ? 'positive' : 'negative'"
+            dense
           >
             {{ props.row.proprietario ? "SIM" : "NÃO" }}
           </q-chip>

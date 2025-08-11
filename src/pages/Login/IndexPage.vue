@@ -1,9 +1,13 @@
 <template>
   <div class="flex flex-center">
     <q-card class="my-card" style="width: 600px">
+      <div class="text-center q-ma-md">
+        <q-img :src="logo" height="120px" width="120px" /> <br />
+        <br />
+        <span class="text-h4">Login do usuário</span>
+      </div>
       <div class="row">
-        <div class="col q-ma-sm">
-          <h6>Login do usuário</h6>
+        <div class="col q-ma-sm text-center">
           <q-form @submit="loginAccount">
             <q-input
               filled
@@ -13,17 +17,34 @@
               lazy-rules
               :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório']"
               autofocus
-            />
+            >
+              <template v-slot:append>
+                <q-icon name="email"  />
+              </template>
+            </q-input>
             <q-input
               filled
               v-model="login.password"
               label="Digite sua senha"
               lazy-rules
               :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório']"
-              type="password"
-            />
+              :type="isPwd ? 'password' : 'text'"
+            >
+              <template v-slot:append>
+                <q-icon
+                  :name="isPwd ? 'visibility_off' : 'visibility'"
+                  class="cursor-pointer"
+                  @click="isPwd = !isPwd"
+                />
+              </template>
+            </q-input>
             <q-card-actions class="justify-between">
-              <q-btn label="Acessar painel" type="submit" color="primary" :loading="loading"/>
+              <q-btn
+                label="Acessar Sistema"
+                type="submit"
+                color="primary"
+                :loading="loading"
+              />
               <q-btn
                 label="Esqueci minha senha"
                 flat
@@ -60,15 +81,25 @@ export default {
       showModal: {
         validate: false,
       },
-      loading:false
+      loading: false,
+      isPwd: true,
     };
   },
   mixins: [ShowToastMixin],
+  computed: {
+    logo() {
+      return require("../../../logo-condominio.png");
+    },
+  },
   methods: {
     async loginAccount() {
-      this.loading = true
+      this.loading = true;
       await autenticacaoApi
-        .get("usuarios", this.login.user.toLocaleLowerCase().trim(), this.login.password.trim())
+        .get(
+          "usuarios",
+          this.login.user.toLocaleLowerCase().trim(),
+          this.login.password.trim()
+        )
         .then(async (result) => {
           const user = result.data[0];
 
@@ -77,7 +108,7 @@ export default {
               "Usuário não encontrado. Verifique e tente novamente",
               "warning"
             );
-            this.loading = false
+            this.loading = false;
             return;
           }
 
@@ -92,7 +123,7 @@ export default {
                 nome: user.nome,
                 usuario: user.usuario,
                 expires_on: new Date(today).getTime(),
-                tenant: user.id_condominio
+                tenant: user.id_condominio,
               });
               this.$router.push({ name: "home" });
             }
@@ -102,7 +133,7 @@ export default {
               "warning"
             );
 
-            this.loading = false
+            this.loading = false;
           }
         })
         .catch((error) => {
@@ -111,7 +142,7 @@ export default {
             "negative"
           );
 
-          this.loading = false
+          this.loading = false;
         });
     },
     openModal(modal) {
