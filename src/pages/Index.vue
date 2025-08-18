@@ -1,6 +1,23 @@
 <template>
   <q-page class="q-ma-md">
-    <span class="text-h5">Bem vindo ao {{ condominio.nome }}</span> <br />
+    <q-item>
+      <q-item-section top avatar>
+        <q-avatar square size="80px">
+          <img :src="condominio.logo" />
+        </q-avatar>
+      </q-item-section>
+
+      <q-item-section>
+        <p>
+          <strong>{{ condominio.nome }} </strong> <br />
+          CNPJ {{ condominio.cnpj }}
+          <br />
+          {{ condominio.logradouro }}, nº {{ condominio.numero }} -
+          {{ condominio.bairro }}, {{ condominio.cidade }} -
+          {{ condominio.uf }} - CEP {{ condominio.cep }}
+        </p>
+      </q-item-section>
+    </q-item>
     <br />
     <q-banner class="bg-primary text-white" rounded>
       <span class="text-h6"> Olá, </span>

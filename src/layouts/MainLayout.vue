@@ -22,7 +22,7 @@
         />
         <q-toolbar-title>
           {{
-            `${currentRoute() === "Home" ? "Morada do Sol" : currentRoute()}`
+            `${currentRoute() === "Home" ? "APP MORADOR" : currentRoute()}`
           }}
         </q-toolbar-title>
         <div>v.1.0.0.4</div>
