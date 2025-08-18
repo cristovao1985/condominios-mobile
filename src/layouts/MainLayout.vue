@@ -25,7 +25,7 @@
             `${currentRoute() === "Home" ? "APP MORADOR" : currentRoute()}`
           }}
         </q-toolbar-title>
-        <div>v.1.0.0.4</div>
+        <div>v.1.0.5</div>
       </q-toolbar>
     </q-header>
 

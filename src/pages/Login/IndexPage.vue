@@ -33,11 +33,12 @@
               mask="##/##/####"
             >
             </q-input>
-            <q-card-actions class="justify-between">
+            <q-card-actions>
               <q-btn
                 label="Acessar Aplicativo"
                 type="submit"
                 color="primary"
+                class="full-width"
                 :loading="loading"
               />
             </q-card-actions>
@@ -57,7 +58,7 @@ import autenticacaoApi from "../../api/autenticacao/autenticacao";
 import helpers from "../../helpers/session";
 import ShowToastMixin from "../../mixins/notify";
 import ValidarUsuarioModal from "./components/ValidarUsuarioModal.vue";
-import dateFormater from "../../helpers/formaters"
+import dateFormater from "../../helpers/formaters";
 export default {
   name: "LoginPage",
   components: {
@@ -85,15 +86,11 @@ export default {
   methods: {
     async loginAccount() {
       this.loading = true;
-      const date = dateFormater.textTodate(this.login.nascimento)
+      const date = dateFormater.textTodate(this.login.nascimento);
       console.log(date);
-      
+
       await autenticacaoApi
-        .get(
-          "condominos",
-          this.login.cpf.trim(),
-          date
-        )
+        .get("condominos", this.login.cpf.trim(), date)
         .then(async (result) => {
           const user = result.data[0];
 
@@ -113,12 +110,12 @@ export default {
             } else {
               var today = new Date();
               today.setHours(today.getHours() + 4);
-              
+
               helpers.setCurrentUser({
                 nome: user.nome,
                 expires_on: new Date(today).getTime(),
                 tenant: user.id_condominio,
-                id: user.id
+                id: user.id,
               });
 
               this.$router.push({ name: "home" });
