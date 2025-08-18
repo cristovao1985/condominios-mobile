@@ -87,8 +87,7 @@ export default {
     async loginAccount() {
       this.loading = true;
       const date = dateFormater.textTodate(this.login.nascimento);
-      console.log(date);
-
+      
       await autenticacaoApi
         .get("condominos", this.login.cpf.trim(), date)
         .then(async (result) => {

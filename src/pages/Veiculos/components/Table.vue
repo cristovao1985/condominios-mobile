@@ -39,25 +39,11 @@
           class="q-mt-sm"
         />
       </template>
-      <template v-slot:body-cell-actions="props">
-        <q-td :props="props">
-          <q-btn
-            color="primary"
-            icon="edit"
-            flat
-            round
-            @click="edit(props.row)"
-            v-if="access.editar"
-          />
-          <q-btn
-            color="negative"
-            icon="delete"
-            flat
-            round
-            @click="remove(props.row)"
-            v-if="access.deletar"
-          />
-        </q-td>
+      <template v-slot:item="props">
+        <q-card class="q-pa-sm q-mb-sm" style="width: 100%">
+          <strong>Descrição: </strong>{{ props.row.descricao }} <br />
+          <strong>Placa: </strong>{{ props.row.placa }} <br />
+        </q-card>
       </template>
     </q-table>
   </div>

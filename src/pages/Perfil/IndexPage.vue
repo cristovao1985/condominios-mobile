@@ -4,10 +4,11 @@
 
     <q-card>
       <q-card-section>
-        <p>{{ condomnino.nome }}</p>
-        <p>{{ condomnino.endereco }}</p>
-        <p>{{ condomnino.telefone }}</p>
-        <p>{{ condomnino.email }}</p>
+        <p class="text-bold">{{ condomino.nome }}</p>
+        <p>{{ condomino.endereco }}</p>
+        <p>{{ condomino.telefone }}</p>
+        <p>{{ condomino.email }}</p>        
+        <p>{{ condomino?.cpf?.substring(0,5) }}...</p>        
       </q-card-section>
     </q-card>
   </q-page>
@@ -15,11 +16,12 @@
 
 <script>
 import baseApi from "src/api/base/base.api";
+import formaters from 'src/helpers/formaters';
 export default {
   name: "PerfilPage",
   data() {
     return {
-      condomnino: {},
+      condomino: {},
     };
   },
   created() {
@@ -31,11 +33,14 @@ export default {
       baseApi
         .getById("condominos", morador.id)
         .then((res) => {
-          this.condomnino = res.data[0];
+          this.condomino = res.data[0];
         })
         .catch((error) => {
           console.log(error);
         });
+    },
+    dateFormat(date) {
+      return formaters.receiptDate(date);
     },
   },
 };

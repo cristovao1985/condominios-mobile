@@ -29,47 +29,15 @@
           </template>
         </q-input>
         <q-space />
-    
       </template>
-      <template v-slot:item-pago="props">
-        <td>
-          <q-chip outline :color="props.row.pago ? 'positive' : 'negative'" dense>
-            {{ props.row.pago ? "PAGO" : "EM ABERTO" }}
-          </q-chip>
-        </td>
-      </template>
-      <template v-slot:body-cell-data_pagamento="props">
-        <td>
-          {{ dateFormat(props.row.data_pagamento) }}
-        </td>
-      </template>
-      <template v-slot:body-cell-actions="props">
-        <q-td :props="props">
-          <q-btn
-            color="positive"
-            icon="receipt"
-            flat
-            round
-            @click="recibo(props.row)"
-            v-if="props.row.pago"
-          />
-          <q-btn
-            color="primary"
-            icon="edit"
-            flat
-            round
-            @click="edit(props.row)"
-            
-          />
-          <q-btn
-            color="negative"
-            icon="delete"
-            flat
-            round
-            @click="remove(props.row)"
-            
-          />
-        </q-td>
+      <template v-slot:item="props">
+        <q-card class="q-pa-sm q-mb-sm" style="width: 100%">
+          <strong>Descrição: </strong>{{ props.row.descricao }} <br />
+          <strong>Valor R$: </strong>{{ props.row.valor }} <br />
+          <strong>Data pagamento: </strong> {{ props.row.data_pagamento }}
+          <br />
+          <strong>Pago: </strong> {{ props.row.pago ? "Sim" : "Não" }} <br />
+        </q-card>
       </template>
     </q-table>
   </div>
@@ -92,8 +60,6 @@ export default {
       filter: "",
       loading: false,
       columns: [
-      
-       
         {
           name: "descricao",
           label: "Descrição",
@@ -108,7 +74,7 @@ export default {
           align: "left",
           sortable: true,
         },
-     
+
         {
           name: "valor",
           label: "Valor R$",
@@ -131,7 +97,6 @@ export default {
           align: "left",
           sortable: true,
         },
-        
       ],
       pagination: {
         rowsPerPage: 10,
