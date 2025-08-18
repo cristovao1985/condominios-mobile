@@ -1,7 +1,5 @@
 export default {
   setCurrentUser: (user) => {
-    console.log(user);
-    
     localStorage.setItem("morador", JSON.stringify(user));
   },
   loggout: () => {

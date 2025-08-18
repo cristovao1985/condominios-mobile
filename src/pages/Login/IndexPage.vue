@@ -109,7 +109,7 @@ export default {
               this.$router.push({ name: "reset" });
             } else {
               var today = new Date();
-              today.setHours(today.getHours() + 4);
+              today.setHours(today.getHours() + 12);
 
               helpers.setCurrentUser({
                 nome: user.nome,
