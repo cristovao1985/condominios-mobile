@@ -10,6 +10,7 @@
       class="my-sticky-column-table"
       rows-per-page-label="Linhas por página"
       dense
+      grid
     >
       <template v-slot:top>
         <q-input
@@ -102,7 +103,6 @@ export default {
           field: "usuario",
           align: "left",
         },
-        { name: "actions", label: "Ações", field: "actions", align: "center" },
       ],
     };
   },

@@ -36,7 +36,7 @@ export default route(function (/* { store, ssrContext } */) {
   });
 
   Router.beforeEach((to, from, next) => {
-    var tokenStr = JSON.parse(localStorage.getItem("user"));
+    var tokenStr = JSON.parse(localStorage.getItem("morador"));
 
     if (
       to.path === "/login" ||
@@ -46,7 +46,7 @@ export default route(function (/* { store, ssrContext } */) {
       next();
     } else if (
       !tokenStr ||
-      !tokenStr.usuario ||
+      !tokenStr.nome ||
       Date.now() > tokenStr.expires_on
     ) {
       next("/login");

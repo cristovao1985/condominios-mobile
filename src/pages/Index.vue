@@ -1,100 +1,57 @@
 <template>
   <q-page class="q-ma-md">
-    <h6>Dashboard</h6>
-    <strong>Saúde financeira</strong>
-    <div class="row">
-      <div class="col q-ma-sm">
-        <q-input
-          v-model="filter.data_ini"
-          label="Data inicial"
-          type="date"
-          required
-          id="start-date"
-        />
-      </div>
-      <div class="col q-ma-sm">
-        <q-input
-          v-model="filter.data_fim"
-          label="Data fim"
-          type="date"
-          required
-          id="end-date"
-        />
-      </div>
-    </div>
-
-    <div class="row">
-      <q-card class="col q-ma-sm q-pa-sm text-center">
-        <q-btn flat color="negative" label="Despesas" to="/despesas" />
-        <br />
-        R$ {{ data.totalD }}
-      </q-card>
-      <q-card class="col q-ma-sm q-pa-sm text-center">
-        <q-btn flat color="positive" label="Receitas" to="/receitas" />
-        <br />
-        R$ {{ data.totalR }}
-      </q-card>
-      <q-card class="col q-ma-sm q-pa-sm text-center">
-        <q-btn flat label="Saldo" />
-        <br />
-        R$ {{ (data.totalR - data.totalD).toFixed(2) }}
-      </q-card>
-    </div>
-
-    <strong>Métricas gerais</strong>
-    <div class="row">
-      <q-card class="col q-ma-sm q-pa-sm text-center">
-        <q-btn flat color="primary" label="Condôminos" to="/condominos" />
-        <br />
-        {{ data.totalC }}
-      </q-card>
-      <q-card class="col q-ma-sm q-pa-sm text-center">
-        <q-btn flat color="secondary" label="Veículos" to="/veiculos" />
-        <br />
-        {{ data.totalV }}
-      </q-card>
-      <q-card class="col q-ma-sm q-pa-sm text-center">
-        <q-btn
-          flat
-          color="warning"
-          label="Manutenções feitas"
-          to="/manutencoes"
-        />
-        <br />
-        {{ data.totalM }}
-      </q-card>
-    </div>
-    <strong>Atenção</strong>
-    <div v-if="ocorrencia">
-      <q-expansion-item
-        header-class="text-negative"
-        expand-separator
-        icon="warning_amber"
-        :label="ocorrencia.titulo"
-        :caption="`${ocorrencia.usuario} - ${dateFormat(ocorrencia.data)}`"
-      >
-        <q-card>
-          <q-card-section>
-            <div v-html="ocorrencia.descricao"></div>
-          </q-card-section>
-        </q-card>
-      </q-expansion-item>
-    </div>
-    <div v-if="manutencao">
-      <q-expansion-item
-        header-class="text-primary"
-        expand-separator
-        icon="handyman"
-        :label="manutencao.titulo"
-        :caption="`${manutencao.usuario} - ${dateFormat(manutencao.data)}`"
-      >
-        <q-card>
-          <q-card-section>
-            <div v-html="manutencao.descricao"></div>
-          </q-card-section>
-        </q-card>
-      </q-expansion-item>
-    </div>
+    <span class="text-h5">Bem vindo ao {{ condominio.nome }}</span> <br />
+    <br />
+    <q-banner class="bg-primary text-white" rounded>
+      <span class="text-h6"> Olá, </span>
+      <strong class="text-h6">
+        {{ condomino.nome }}
+      </strong>
+    </q-banner>
+    <br />
+    <q-list bordered>
+      <q-item clickable v-ripple @click="navigateTo('lancamentos')">
+        <q-item-section avatar>
+          <q-icon color="primary" name="attach_money" />
+        </q-item-section>
+        <q-item-section>Lançamentos em meu nome</q-item-section>
+      </q-item>
+      <q-separator />
+      <q-item clickable v-ripple @click="navigateTo('veiculos')">
+        <q-item-section avatar>
+          <q-icon color="primary" name="drive_eta" />
+        </q-item-section>
+        <q-item-section>Meus veículos</q-item-section>
+      </q-item>
+      <q-separator />
+      <q-item clickable v-ripple @click="navigateTo('relatorios')">
+        <q-item-section avatar>
+          <q-icon color="primary" name="request_page" />
+        </q-item-section>
+        <q-item-section>Prestação de contas</q-item-section>
+      </q-item>
+      <q-separator />
+      <q-item clickable v-ripple @click="navigateTo('ocorrencias')">
+        <q-item-section avatar>
+          <q-icon color="primary" name="warning_amber" />
+        </q-item-section>
+        <q-item-section>Livro de ocorrências e notícias</q-item-section>
+      </q-item>
+      <q-separator />
+      <q-item clickable v-ripple @click="navigateTo('manutencoes')">
+        <q-item-section avatar>
+          <q-icon color="primary" name="handyman" />
+        </q-item-section>
+        <q-item-section>Serviços e manutenções</q-item-section>
+      </q-item>
+      <q-separator />
+      <q-item clickable v-ripple @click="navigateTo('perfil')">
+        <q-item-section avatar>
+          <q-icon color="primary" name="settings" />
+        </q-item-section>
+        <q-item-section>Meus Dados</q-item-section>
+      </q-item>
+    </q-list>
   </q-page>
 </template>
 
@@ -132,13 +89,12 @@ export default {
       },
       ocorrencia: {},
       manutencao: {},
+      condomino: JSON.parse(localStorage.getItem("morador")),
+      condominio: {},
     };
   },
   async created() {
-    this.setFilterDates();
-    this.getDashboardData();
-    this.getOcorrencia();
-    this.getManutencao();
+    this.getCondominio();
   },
   watch: {
     "filter.data_ini"() {
@@ -198,6 +154,20 @@ export default {
 
       this.filter.data_ini = firstDay.toISOString().split("T")[0];
       this.filter.data_fim = lastDay.toISOString().split("T")[0];
+    },
+    getCondominio() {
+      const morador = JSON.parse(localStorage.getItem("morador"));
+      baseApi
+        .getById("tenants", morador.tenant)
+        .then((res) => {
+          this.condominio = res.data[0];
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    navigateTo(path) {
+      this.$router.push({ name: path });
     },
   },
 };

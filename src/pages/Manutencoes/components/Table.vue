@@ -10,6 +10,7 @@
       class="my-sticky-column-table"
       rows-per-page-label="Linhas por página"
       dense
+      grid
     >
       <template v-slot:top>
         <q-input
@@ -99,20 +100,6 @@ export default {
       loading: false,
       columns: [
         {
-          name: "condomino",
-          label: "Solicitante",
-          field: "condomino",
-          align: "left",
-          sortable: true,
-        },
-        {
-          name: "endereco",
-          label: "Unidade",
-          field: "endereco",
-          align: "left",
-          sortable: true,
-        },
-        {
           name: "titulo",
           label: "Título",
           field: "titulo",
@@ -132,7 +119,6 @@ export default {
           field: "data",
           align: "left",
         },
-        { name: "actions", label: "Ações", field: "actions", align: "center" },
       ],
     };
   },

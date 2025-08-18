@@ -32,9 +32,10 @@
         />
       </div>
     </div>
+    <TableReceitas :data="receitas" />
+    <TableDespesas :data="despesas" />
     <div class="row">
       <div class="col q-ma-sm">
-        <TableReceitas :data="receitas" />
         <!-- <table>
           <tr>
             <th>Data</th>
@@ -55,7 +56,6 @@
         </table> -->
       </div>
       <div class="col q-ma-sm">
-        <TableDespesas :data="despesas" />
         <!-- <table>
           <tr>
             <th>Data</th>
@@ -86,15 +86,6 @@
       <div>
         <strong>SALDO : R$ {{ (sumReceitas - sumDespesas).toFixed(2) }}</strong>
       </div>
-    </div>
-    <div class="q-mt-md">
-      <q-btn
-        label="Gerar prestação de contas"
-        class="full-width"
-        color="primary"
-        v-if="showPrintButton"
-        @click="openRelatorio"
-      />
     </div>
   </q-page>
 </template>
@@ -155,14 +146,16 @@ export default {
   },
   computed: {
     sumDespesas() {
-      return this.despesas.reduce((accumulator, object) => {
+      const totalDespesas = this.despesas.reduce((accumulator, object) => {
         return accumulator + parseFloat(object.valor);
       }, 0);
+      return parseFloat(totalDespesas).toFixed(2)
     },
     sumReceitas() {
-      return this.receitas.reduce((accumulator, object) => {
+      const totalDespesas = this.receitas.reduce((accumulator, object) => {
         return accumulator + parseFloat(object.valor);
       }, 0);
+      return parseFloat(totalDespesas).toFixed(2)
     },
     showPrintButton() {
       return this.despesas.length && this.receitas.length;

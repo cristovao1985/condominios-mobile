@@ -1,12 +1,13 @@
 import axios from "axios";
+import helpers from "../../helpers/session";
+const user = await helpers.getCurrentUser();
 const baseUrl = `${process.env.VUE_APP_API_BASE_URL}/base`;
 const baseReceitasUrl = `${process.env.VUE_APP_API_BASE_URL}/receitas`;
 const headersJson = {
   Authorization: "Basic MTEyMzQ1Njc4OTA6MDk4NzY1NDMyMTE=",
   "Content-Type": "application/json",
+  'X-Tenant': user?.tenant
 };
-import helpers from "../../helpers/session";
-const user = await helpers.getCurrentUser();
 
 export default {
   get: async (table, order, year, month) => {
@@ -97,6 +98,21 @@ export default {
     const response = await axios({
       method: "POST",
       url: `${baseReceitasUrl}/dashboard`,
+      data: data,
+      headers: headersJson,
+    });
+
+    return response.data;
+  },
+    getLancamentosMorador: async (table, id) => {
+    var data = JSON.stringify({
+      table,
+      id_condomino: user.id
+    });
+
+    const response = await axios({
+      method: "POST",
+      url: `${baseReceitasUrl}/receitas-morador`,
       data: data,
       headers: headersJson,
     });

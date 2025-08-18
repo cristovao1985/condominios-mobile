@@ -16,4 +16,7 @@ export default {
   receiptDate: (date) => {
     return moment(date).format("DD/MM/YYYY");
   },
+  textTodate: (date) => {
+    return moment(date, "DD/MM/YYYY").format("YYYY-MM-DD");
+  },
 };

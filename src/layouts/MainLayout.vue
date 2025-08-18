@@ -37,7 +37,7 @@
     >
       <q-list>
         <q-item-label header class="text-grey-8">
-          Controle de Condomínio
+          <q-img :src="logo" height="120px" width="120px" /> <br />
         </q-item-label>
         <EssentialLink
           v-for="link in essentialLinks"
@@ -70,29 +70,17 @@ const linksData = [
     icon: "home",
     link: "#/home",
   },
-  {
-    title: "Condominos",
-    caption: "Controle de moradores",
-    icon: "people",
-    link: "#/condominos",
+    {
+    title: "Lançamentos",
+    caption: "Lançamentos em neu nome",
+    icon: "attach_money",
+    link: "#/lancamentos",
   },
   {
     title: "Veículos",
-    caption: "Controle de veículos",
+    caption: "Meus veículos",
     icon: "drive_eta",
     link: "#/veiculos",
-  },
-  {
-    title: "Receitas",
-    caption: "Entrada de receitas",
-    icon: "attach_money",
-    link: "#/receitas",
-  },
-  {
-    title: "Despesas",
-    caption: "Despesas do condomínio",
-    icon: "money_off_csred",
-    link: "#/despesas",
   },
   {
     title: "Financeiro",
@@ -112,6 +100,12 @@ const linksData = [
     icon: "handyman",
     link: "#/manutencoes",
   },
+  {
+    title: "Perfil",
+    caption: "Meus Dados",
+    icon: "settings",
+    link: "#/perfil",
+  },
 ];
 
 export default {
@@ -124,6 +118,11 @@ export default {
       leftDrawerOpen: false,
       essentialLinks: linksData,
     };
+  },
+  computed: {
+    logo() {
+      return require("../../logo-condominio.png");
+    },
   },
   methods: {
     loggout() {

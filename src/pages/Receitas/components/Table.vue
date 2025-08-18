@@ -11,6 +11,7 @@
       :pagination="pagination"
       rows-per-page-label="Linhas por página"
       dense
+      grid
     >
       <template v-slot:top>
         <q-input
@@ -28,26 +29,9 @@
           </template>
         </q-input>
         <q-space />
-        <q-btn
-          color="primary"
-          label="Adicionar"
-          :disable="loading"
-          icon="add"
-          @click="add"
-          class="q-mr-sm q-mt-sm"
-          v-if="access.criar"
-        />
-        <q-btn
-          color="primary"
-          label="Gerar recorrência"
-          :disable="loading"
-          icon="add"
-          @click="recorrencia"
-          v-if="access.criar"
-          class="q-mt-sm"
-        />
+    
       </template>
-      <template v-slot:body-cell-pago="props">
+      <template v-slot:item-pago="props">
         <td>
           <q-chip outline :color="props.row.pago ? 'positive' : 'negative'" dense>
             {{ props.row.pago ? "PAGO" : "EM ABERTO" }}
@@ -75,7 +59,7 @@
             flat
             round
             @click="edit(props.row)"
-            v-if="access.editar"
+            
           />
           <q-btn
             color="negative"
@@ -83,7 +67,7 @@
             flat
             round
             @click="remove(props.row)"
-            v-if="access.deletar"
+            
           />
         </q-td>
       </template>
@@ -108,18 +92,8 @@ export default {
       filter: "",
       loading: false,
       columns: [
-        {
-          name: "condomino",
-          label: "Condômino",
-          field: "condomino",
-          align: "left",
-        },
-        {
-          name: "endereco",
-          label: "Unidade",
-          field: "endereco",
-          align: "left",
-        },
+      
+       
         {
           name: "descricao",
           label: "Descrição",
@@ -134,13 +108,7 @@ export default {
           align: "left",
           sortable: true,
         },
-        {
-          name: "mes",
-          label: "Mês referência",
-          field: "mes",
-          align: "left",
-          sortable: true,
-        },
+     
         {
           name: "valor",
           label: "Valor R$",
@@ -163,7 +131,7 @@ export default {
           align: "left",
           sortable: true,
         },
-        { name: "actions", label: "Ações", field: "actions", align: "center" },
+        
       ],
       pagination: {
         rowsPerPage: 10,

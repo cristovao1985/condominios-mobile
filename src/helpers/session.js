@@ -1,12 +1,14 @@
 export default {
   setCurrentUser: (user) => {
-    localStorage.setItem("user", JSON.stringify(user));
+    console.log(user);
+    
+    localStorage.setItem("morador", JSON.stringify(user));
   },
   loggout: () => {
     localStorage.clear();
   },
   getCurrentUser: async () => {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("morador"));
 
     return user;
   },

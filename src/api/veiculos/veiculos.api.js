@@ -12,12 +12,12 @@ export default {
   get: async (table, order) => {
     var data = JSON.stringify({
       table,
-      order,
+      id_condomino: user.id,
     });
 
     const response = await axios({
       method: "POST",
-      url: `${baseUrl}`,
+      url: `${baseUrl}/veiculos-morador`,
       data: data,
       headers: headersJson,
     });

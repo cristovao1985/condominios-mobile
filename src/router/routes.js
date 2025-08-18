@@ -67,9 +67,9 @@ const routes = [
         component: () => import("src/pages/Veiculos/VeiculoPage.vue"),
       },
       {
-        path: "/receitas",
-        name: "receitas",
-        meta: { title: "Receitas" },
+        path: "/lancamentos",
+        name: "lancamentos",
+        meta: { title: "Lançamentos" },
         component: () => import("src/pages/Receitas/IndexPage.vue"),
       },
       {
@@ -129,6 +129,13 @@ const routes = [
         props: true,
         meta: { title: "Manutenção" },
         component: () => import("src/pages/Manutencoes/ManutencaoPage.vue"),
+      },
+      {
+        path: "/perfil",
+        name: "perfil",
+        props: true,
+        meta: { title: "Meu Perfil" },
+        component: () => import("src/pages/Perfil/IndexPage.vue"),
       },
     ],
   },

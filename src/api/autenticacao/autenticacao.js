@@ -9,16 +9,16 @@ const headersJson = {
 };
 
 export default {
-  get: async (table, user, password) => {
+  get: async (table, cpf, nascimento) => {
     var data = JSON.stringify({
-      table,
-      user: MD5(user).toString(),
-      password: MD5(password).toString(),
+      cpf,
+      nascimento,
+      table
     });
 
     const response = await axios({
       method: "POST",
-      url: `${baseUrl}`,
+      url: `${baseUrl}/login-morador`,
       data: data,
       headers: headersJson,
     });

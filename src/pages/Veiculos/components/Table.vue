@@ -11,6 +11,7 @@
       :pagination="pagination"
       rows-per-page-label="Linhas por página"
       dense
+      grid
     >
       <template v-slot:top>
         <q-input
@@ -91,19 +92,6 @@ export default {
           field: "placa",
           align: "left",
         },
-        {
-          name: "condomino",
-          label: "Proprietário",
-          field: "condomino",
-          align: "left",
-        },
-        {
-          name: "endereco",
-          label: "Unidade",
-          field: "endereco",
-          align: "left",
-        },
-        { name: "actions", label: "Ações", field: "actions", align: "center" },
       ],
       pagination: {
         rowsPerPage: 10,

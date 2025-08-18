@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-ma-md">
-    <div class="row">
+    <!-- <div class="row">
       <div class="col q-ma-sm">
         <q-select
           v-model="filter.ano"
@@ -17,24 +17,9 @@
           required
         />
       </div>
-    </div>
+    </div> -->
     <TableSkeleton v-if="loading" />
-    <TableReceitas
-      :data="receitas"
-      v-else
-      @add="addReceita"
-      @edit="editReceita"
-      @delete="openModal"
-      @recibo="openRecibo"
-      @recorrencia="addRecorrencia"
-      :access="acessos"
-    />
-    <DeleteReceitaModal
-      :data="showModal.delete"
-      @closeModal="closeModal"
-      :receita="receita"
-      @confirm="deleteReceita"
-    />
+    <TableReceitas :data="receitas" v-else @recibo="openRecibo" />
   </q-page>
 </template>
 
@@ -42,7 +27,6 @@
 import baseApi from "src/api/base/base.api";
 import receitasApi from "src/api/receitas/receitas.api";
 import TableReceitas from "./components/Table.vue";
-import DeleteReceitaModal from "./components/DeleteReceitaModal.vue";
 import ShowToastMixin from "../../mixins/notify";
 import TableSkeleton from "src/components/TableSkeleton.vue";
 import acessosApi from "../../api/acessos/acessos";
@@ -50,7 +34,6 @@ export default {
   name: "IndexPage",
   components: {
     TableReceitas,
-    DeleteReceitaModal,
     TableSkeleton,
   },
   data() {
@@ -89,7 +72,7 @@ export default {
     };
   },
   created() {
-    this.getAcessos();
+    //this.getAcessos();
     this.getAll();
   },
   mixins: [ShowToastMixin],
@@ -104,10 +87,8 @@ export default {
   methods: {
     async getAll() {
       this.loading = true;
-      localStorage.setItem("ano-receita", this.filter.ano);
-      localStorage.setItem("mes-receita", this.filter.mes);
       await receitasApi
-        .get(this.tableName, "data_pagamento", this.filter.ano, this.filter.mes)
+        .getLancamentosMorador(this.tableName)
         .then((result) => {
           this.receitas = result.data;
 

@@ -1,23 +1,24 @@
 import axios from "axios";
 const baseUrl = `${process.env.VUE_APP_API_BASE_URL}/manutencoes`;
+import helpers from "../../helpers/session";
+const user = await helpers.getCurrentUser();
 
 const headersJson = {
   Authorization: "Basic MTEyMzQ1Njc4OTA6MDk4NzY1NDMyMTE=",
   "Content-Type": "application/json",
+    'X-Tenant': user?.tenant
 };
-import helpers from "../../helpers/session";
-const user = await helpers.getCurrentUser();
 
 export default {
-  get: async (table, order, year, month) => {
+  get: async (table) => {
     var data = JSON.stringify({
       table,
-      order,
+      id_condomino: user.id,
     });
 
     const response = await axios({
       method: "POST",
-      url: `${baseUrl}`,
+      url: `${baseUrl}/manutencoes-morador`,
       data: data,
       headers: headersJson,
     });

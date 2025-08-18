@@ -4,7 +4,7 @@
       <div class="text-center q-ma-md">
         <q-img :src="logo" height="120px" width="120px" /> <br />
         <br />
-        <span class="text-h4">Login do usuário</span>
+        <span class="text-h4">Login do Morador</span>
       </div>
       <div class="row">
         <div class="col q-ma-sm text-center">
@@ -12,43 +12,33 @@
             <q-input
               filled
               type="text"
-              v-model="login.user"
-              label="Digite seu usuário"
+              v-model="login.cpf"
+              label="Digite seu CPF"
               lazy-rules
               :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório']"
               autofocus
+              mask="###.###.###-##"
+              placeholder="Ex: 123.456.789-00"
             >
               <template v-slot:append>
-                <q-icon name="email"  />
+                <q-icon name="assignment_ind" />
               </template>
             </q-input>
             <q-input
               filled
-              v-model="login.password"
-              label="Digite sua senha"
+              v-model="login.nascimento"
+              label="Digite sua data de Nascimento"
               lazy-rules
               :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório']"
-              :type="isPwd ? 'password' : 'text'"
+              mask="##/##/####"
             >
-              <template v-slot:append>
-                <q-icon
-                  :name="isPwd ? 'visibility_off' : 'visibility'"
-                  class="cursor-pointer"
-                  @click="isPwd = !isPwd"
-                />
-              </template>
             </q-input>
             <q-card-actions class="justify-between">
               <q-btn
-                label="Acessar Sistema"
+                label="Acessar Aplicativo"
                 type="submit"
                 color="primary"
                 :loading="loading"
-              />
-              <q-btn
-                label="Esqueci minha senha"
-                flat
-                @click="openModal('validate')"
               />
             </q-card-actions>
           </q-form>
@@ -67,6 +57,7 @@ import autenticacaoApi from "../../api/autenticacao/autenticacao";
 import helpers from "../../helpers/session";
 import ShowToastMixin from "../../mixins/notify";
 import ValidarUsuarioModal from "./components/ValidarUsuarioModal.vue";
+import dateFormater from "../../helpers/formaters"
 export default {
   name: "LoginPage",
   components: {
@@ -75,8 +66,8 @@ export default {
   data() {
     return {
       login: {
-        user: "",
-        password: "",
+        cpf: "",
+        nascimento: "",
       },
       showModal: {
         validate: false,
@@ -94,11 +85,14 @@ export default {
   methods: {
     async loginAccount() {
       this.loading = true;
+      const date = dateFormater.textTodate(this.login.nascimento)
+      console.log(date);
+      
       await autenticacaoApi
         .get(
-          "usuarios",
-          this.login.user.toLocaleLowerCase().trim(),
-          this.login.password.trim()
+          "condominos",
+          this.login.cpf.trim(),
+          date
         )
         .then(async (result) => {
           const user = result.data[0];
@@ -119,12 +113,14 @@ export default {
             } else {
               var today = new Date();
               today.setHours(today.getHours() + 4);
+              
               helpers.setCurrentUser({
                 nome: user.nome,
-                usuario: user.usuario,
                 expires_on: new Date(today).getTime(),
                 tenant: user.id_condominio,
+                id: user.id
               });
+
               this.$router.push({ name: "home" });
             }
           } else {

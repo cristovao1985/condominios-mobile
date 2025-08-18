@@ -46,7 +46,7 @@ export default {
     };
   },
   created() {
-    this.getAcessos();
+    //this.getAcessos();
     this.getAll();
   },
   mixins: [ShowToastMixin],
