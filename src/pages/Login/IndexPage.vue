@@ -11,7 +11,7 @@
           <q-form @submit="loginAccount">
             <q-input
               filled
-              type="text"
+              type="tel"
               v-model="login.cpf"
               label="Digite seu CPF"
               lazy-rules
