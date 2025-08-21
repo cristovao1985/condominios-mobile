@@ -19,7 +19,7 @@
       </div>
     </div> -->
     <TableSkeleton v-if="loading" />
-    <TableReceitas :data="receitas" v-else @recibo="openRecibo" />
+    <TableReceitas :data="receitas" v-else @recibo="openRecibo" @edit="editReceita"/>
   </q-page>
 </template>
 
@@ -106,10 +106,21 @@ export default {
       this.$router.push({ name: "recorrencia" });
     },
     editReceita(receita) {
-      this.$router.push({
-        name: "receita",
-        params: { id: receita.id },
-      });
+      delete receita.data_pagamento
+      baseApi
+        .update("receitas", receita)
+        .then(() => {
+          ShowToastMixin.showToast(
+            "Recibo enviado com sucesso! Aguarde para que o setor responsável dê baixa no lançamento",
+            "positive"
+          );
+        })
+        .catch((error) => {
+          ShowToastMixin.showToast(
+            "Houve um erro ao enviar recibo. Tente novamente",
+            "negative"
+          );
+        });
     },
     async deleteReceita(receita) {
       await baseApi

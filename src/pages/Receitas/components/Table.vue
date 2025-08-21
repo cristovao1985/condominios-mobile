@@ -37,13 +37,101 @@
           <strong>Data pagamento: </strong> {{ props.row.data_pagamento }}
           <br />
           <strong>Pago: </strong> {{ props.row.pago ? "Sim" : "Não" }} <br />
+          <q-card-actions align="right">
+            <q-btn
+              flat
+              label="Ver recibo"
+              @click="openModal('pagamento', props.row)"
+              v-if="props.row.recibo"
+            />
+            <q-btn
+              flat
+              label="Enviar recibo"
+              color="positive"
+              @click="openModal('recibo', props.row)"
+               v-if="!props.row.pago"
+            />
+          </q-card-actions>
         </q-card>
       </template>
     </q-table>
+
+    <q-dialog v-model="showModal.recibo" persistent>
+      <q-card>
+        <q-card-section>
+          <span class="text-h6"
+            >Selecione o recibo para o
+            <span class="text-primary">{{ receita.descricao }}</span></span
+          >
+        </q-card-section>
+        <q-card-section>
+          <q-file
+            outlined
+            v-model="file"
+            label="Selecione o recibo de pagamento"
+            class="q-mb-sm"
+          >
+            <template v-slot:prepend>
+              <q-icon name="attach_file" />
+            </template>
+          </q-file>
+
+          <iframe
+            :src="receita.recibo"
+            frameborder="0"
+            width="100%"
+            v-if="receita.recibo"
+          />
+          <q-card-actions align="right">
+            <q-btn
+              icon="delete"
+              dense
+              flat
+              color="negative"
+              v-if="receita.recibo"
+              @click="receita.recibo = ''"
+            />
+          </q-card-actions>
+        </q-card-section>
+        <q-card-actions align="right">
+          <q-btn flat label="Cancelar" @click="closeModal('recibo')" />
+
+          <q-btn
+            flat
+            label="Enviar recibo"
+            color="positive"
+            v-if="receita.recibo"
+            @click="edit(receita)"
+          />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+    <q-dialog v-model="showModal.pagamento">
+      <q-card>
+        <q-card-section>
+          <span class="text-h6"
+            >Recibo para o
+            <span class="text-primary">{{ receita.descricao }}</span></span
+          >
+        </q-card-section>
+        <q-card-section>
+          <iframe
+            :src="receita.recibo"
+            frameborder="0"
+            width="100%"
+            v-if="receita.recibo"
+          />
+        </q-card-section>
+        <q-card-actions align="right">
+          <q-btn flat label="Fechar" @click="closeModal('pagamento')" />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 <script>
 import formaters from "../../../helpers/formaters";
+import base64Helper from "../../../helpers/base64";
 export default {
   name: "TableCondominos",
   props: {
@@ -101,7 +189,18 @@ export default {
       pagination: {
         rowsPerPage: 10,
       },
+      file: "",
+      showModal: {
+        recibo: false,
+        pagamento: false,
+      },
+      receita: {},
     };
+  },
+  watch: {
+    file() {
+      this.convertImageToBase64();
+    },
   },
   methods: {
     add() {
@@ -109,6 +208,9 @@ export default {
     },
     edit(receita) {
       this.$emit("edit", receita);
+      this.receita = {};
+      this.closeModal("recibo");
+      this.file = "";
     },
     remove(receita) {
       this.$emit("delete", { modal: "delete", receita });
@@ -121,6 +223,26 @@ export default {
     },
     recorrencia() {
       this.$emit("recorrencia");
+    },
+    openModal(modal, object) {
+      this.receita = { ...object };
+      this.showModal[modal] = true;
+    },
+    closeModal(modal) {
+      this.showModal[modal] = false;
+    },
+    async convertImageToBase64(file = this.file) {
+      return await base64Helper
+        .getBase64(file)
+        .then((data) => {
+          this.receita.recibo = data;
+          console.log(data);
+        })
+        .catch((error) => {
+          console.log(error);
+
+          return null;
+        });
     },
   },
 };
